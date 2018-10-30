@@ -24,6 +24,11 @@
                         @csrf
                         <div class="form-group">
                             <img src="{{ $im }}" class="img-thumbnail" alt="images" style="max-height: 300px;">
+                            @if($maximus > 0.7)
+                                <p>Возможно это <strong>{{ $predict }}</strong> - {{ $maximus }}</p>
+                            @else
+                                <p>Нейронной сети не удалось определить</p>
+                            @endif
                             <input type="text" name="image" value="{{ $im }}" id="exampleFormControlFile1" hidden>
                         </div>
                         <div class="form-group">
