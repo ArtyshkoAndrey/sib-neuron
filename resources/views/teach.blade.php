@@ -23,18 +23,17 @@
         <form action='{{ route("train") }}' method="post" enctype="multipart/form-data">
            @csrf
           <div class="form-group">
+              <img src="{{ $im }}" class="img-fluid" alt="">
             <label for="exampleFormControlFile1">Загрузите фотографию для обучения</label>
-            <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+            <input type="text" name="image" value="{{ $im }}" id="exampleFormControlFile1" hidden>
             <select name="label" id="">
               <option value="people">Человек</option>
               <option value="dog">собака</option>
+              <option value="error">Нету</option>
             </select>
             <input type="submit" value="Отправить">
           </div>
         </form>
-        @if(session('label'))
-          {{ session('label') }}
-        @endif
       </div>
     </div>
   </div>

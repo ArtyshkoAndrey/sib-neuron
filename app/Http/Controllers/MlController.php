@@ -6,81 +6,37 @@ use App\Http\Controllers\Controller;
 use Phpml\Classification\KNearestNeighbors;
 use Phpml\Classification\SVC;
 use Phpml\SupportVectorMachine\Kernel;
-use App\Image2Ml;
 use Phpml\ModelManager;
 use Illuminate\Http\Request;
+use App\Image2Ml;
+use App\ImageParser;
 
 class MlController extends Controller
 {
+    public function teach()
+    {
+        $im = new ImageParser('https://pixabay.com/api/?key=10542644-549c54b5d387dd41892ea2b24&q=people&image_type=photo&cat=people&order=latest&per_page=50');
+        $im = $im->setIm();
+        return view('teach', compact('im'));
+    }
 
-  public function teach() {
+    public function trainTest(Request $request)
+    {
+        if ($request->isMethod('post')) {
 
-  //   $modelManager = new ModelManager();
+            if (file_exists(public_path() . '/neuron/data') && $request->label != 'error') {
 
-  // 	$classifier = $modelManager->restoreFromFile(public_path() . '/neuron/data');
+                $file = $request->image;
+                $label = array((string)$request->label);
 
-  // 	$im = imagecreatefromjpeg(public_path() . "/images/dogs/n02086240_1011.jpg");
-		// $im1=imagecreatetruecolor(40,40);
-	 //  imagecopyresampled($im1,$im,0,0,0,0,40,40,imagesx($im),imagesy($im));
-
-	 //  $cur_array = array();
-	 //  $cnt = 0;
-	 //  for($y=0; $y<imagesy($im1); $y++)
-	 //  {
-	 //      for($x=0; $x < imagesx($im1); $x++)
-	 //      {
-	 //          $rgb = imagecolorat($im1, $x, $y) / 16777215;
-	 //          $cur_array[$cnt] = $rgb;
-	 //          $cnt++; 
-	 //          if($cnt == 1999)
-	 //          	break;
-	 //      }
-	 //  }
-
-	 //  imagedestroy($im);
-	 //  imagedestroy($im1);
-	 //  $predictedLabels = $classifier->predict(array_slice($cur_array,1));
-
-	 //  return array_slice($cur_array,1);
-      
-   	return view('teach');   
-  }
-
-    public function trainTest(Request $request) {
-    	if($request->isMethod('post')){
-
-        if($request->hasFile('image')) {
-          $file = $request->file('image');
-          $filename = rand(0, 1000).'.jpg';
-          $file->move(public_path() . '/data', $filename);
-
-          $label = array((string)$request->label);
-
-          $modelManager = new ModelManager();
-
-			  	$classifier = $modelManager->restoreFromFile(public_path() . '/neuron/data');
-
-			  	$im = imagecreatefromjpeg(public_path() . '/data/' . $filename);
-					$im1=imagecreatetruecolor(40,40);
-				  imagecopyresampled($im1,$im,0,0,0,0,40,40,imagesx($im),imagesy($im));
-				  imagedestroy($im);
-				  $cur_array = array();
-				  $cnt = 0;
-				  for($y=0; $y<imagesy($im1); $y++)
-				  {
-				      for($x=0; $x < imagesx($im1); $x++)
-				      {
-				          $rgb = imagecolorat($im1, $x, $y) / 16777215;
-				          $cur_array[$cnt] = $rgb;
-				          $cnt++;
-				      }
-				  }
-				  imagedestroy($im1);
-				  $classifier->train(array(array_slice($cur_array,1)), $label);
-				  $predictedLabel = $classifier->predict(array_slice($cur_array,1));
-				  $modelManager->saveToFile($classifier, public_path() . '/neuron/data');
-				  return redirect('teach')->with('label', $predictedLabel);
+                $im = new Image2Ml($file);
+                $trainedData = $im->grayScalePixels();
+                $modelManager = new ModelManager();
+                $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/data');
+                $classifier->train($trainedData, $label);
+                $modelManager->saveToFile($classifier, public_path() . '/neuron/data');
+            }
         }
-    	}
+        return redirect('teach');
     }
 }
