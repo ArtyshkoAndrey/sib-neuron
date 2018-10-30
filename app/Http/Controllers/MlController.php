@@ -15,7 +15,7 @@ class MlController extends Controller
 {
     public function teach()
     {
-        $im = new ImageParser('https://pixabay.com/api/?key=10542644-549c54b5d387dd41892ea2b24&q=people&image_type=photo&cat=people&order=latest&per_page=50');
+        $im = new ImageParser('https://pixabay.com/api/?key=10542644-549c54b5d387dd41892ea2b24&q=people&image_type=photo&cat=people&order=latest&per_page=50&page='.rand(1,6));
         $im = $im->setIm();
         return view('teach', compact('im'));
     }
