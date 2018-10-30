@@ -26,7 +26,7 @@ class ImageParser
         $content = file_get_contents($this->url);
         $json = json_decode($content);
         foreach ($json->hits as $resultjson) {
-            array_push($result, $resultjson->previewURL);
+            array_push($result, $resultjson->largeImageURL);
         }
         return  $result[$this->num];
     }
