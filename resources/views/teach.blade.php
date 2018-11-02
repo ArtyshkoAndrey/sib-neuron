@@ -22,24 +22,29 @@
                 <div class="col-md-6 offset-md-3 pt-2">
                     <form action='{{ route("train") }}' method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group text-center">
                             <img src="{{ $im }}" class="img-thumbnail" alt="images" style="max-height: 300px;">
-                            @if($maximus > 0.7)
-                                <p>Возможно это <strong>{{ $predict }}</strong> - {{ $maximus }}</p>
-                            @else
-                                <p>Нейронной сети не удалось определить <strong>{{ $predict }}</strong> - {{ $maximus }}</p>
-                            @endif
+                            {{--@if($maximus > 0.7)--}}
+                                {{--<p>Возможно это <strong>{{ $predict }}</strong> - {{ $maximus }}</p>--}}
+                            {{--@else--}}
+                                {{--<p>Нейронной сети не удалось определить <strong>{{ $predict }}</strong> - {{ $maximus }}</p>--}}
+                            {{--@endif--}}
                             <input type="text" name="image" value="{{ $im }}" id="exampleFormControlFile1" hidden>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Example select</label>
-                            <select class="form-control" name="label" id="exampleFormControlSelect1">
-                                <option value="people">Человек</option>
-                                <option value="dog">Cобака</option>
-                                <option value="error">Нет</option>
-                            </select>
+                        <div class="form-group text-center">
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary m-1 ">
+                                    <input type="radio" name="options" id="option1" value="people" autocomplete="off"> Человек
+                                </label>
+                                <label class="btn btn-secondary m-1">
+                                    <input type="radio" name="options" id="option2" value="dog" autocomplete="off"> Собака
+                                </label>
+                                <label class="btn btn-secondary m-1">
+                                    <input type="radio" name="options" id="option3" value="error" autocomplete="off"> Нет
+                                </label>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Отправить</button>
+                        <button type="submit" class="btn btn-primary btn-block">Отправить</button>
                     </form>
                 </div>
             </div>
