@@ -20,31 +20,34 @@ class MlController extends Controller
         //else
         //    $im = new ImageParser('https://pixabay.com/api/?key=10542644-549c54b5d387dd41892ea2b24&q=dog&image_type=photo&order=latest&per_page=50&page='.rand(1,6));
         $im = $im->setIm();
-        $im1 = new Image2Ml($im);
-        $trainedData = $im1->grayScalePixels();
+//        $im1 = new Image2Ml($im);
+//        $trainedData = $im1->grayScalePixels();
 
-        $modelManager = new ModelManager();
-        $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/data');
-        $predictLabel = $classifier->predictProbability($trainedData);
-        $predict = NULL;
-        $maximus = NULL;
-        $maximus = $predictLabel[0]['people'];
-        $predict = 'человек';        if($maximus < $predictLabel[0]['dog']) {
-            $maximus = $predictLabel[0]['dog'];
-            $predict = 'собака';
-        }
+//        $modelManager = new ModelManager();
+//        $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/data');
+//        $predictLabel = $classifier->predictProbability($trainedData);
+//        $predict = NULL;
+//        $maximus = NULL;
+//        $maximus = $predictLabel[0]['people'];
+//        $predict = 'человек';
+//        if($maximus < $predictLabel[0]['dog']) {
+//            $maximus = $predictLabel[0]['dog'];
+//            $predict = 'собака';
+//        }
 
-        return view('teach', compact('im', 'predict', 'maximus'));
+//        return view('teach', compact('im', 'predict', 'maximus'));
+
+        return view('teach', compact('im'));
     }
 
     public function trainTest(Request $request)
     {
         if ($request->isMethod('post')) {
 
-            if (file_exists(public_path() . '/neuron/data') && $request->label != 'error') {
+            if (file_exists(public_path() . '/neuron/data') && $request->options != 'error') {
 
                 $file = $request->image;
-                $label = array((string)$request->label);
+                $label = array((string)$request->options);
 
                 $im = new Image2Ml($file);
                 $trainedData = $im->grayScalePixels();
@@ -68,5 +71,29 @@ class MlController extends Controller
             }
         }
         return redirect('teach');
+    }
+
+    public function allDogs() {
+
+        $content = file_get_contents('http://image-net.org/api/text/imagenet.synset.geturls?wnid=n07942152');
+        $search = explode("\r\n", $content);
+
+        $labels = array();
+        $simple = array();
+
+        for($i=300; $i< 390; $i++) {
+            if (@fopen($search[$i], "r")) {
+                $im[$i] = new Image2Ml($search[$i]);
+                $simple[$i] = $im[$i]->grayScalePixels();
+                $labels[$i] = 'people';
+            }
+        }
+
+        $modelManager = new ModelManager();
+        $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/data');
+        $classifier->train($simple, $labels);
+        $modelManager->saveToFile($classifier, public_path() . '/neuron/data');
+
+        return 'true';
     }
 }

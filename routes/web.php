@@ -22,3 +22,7 @@ Route::get('teach',[
 Route::post('train',[
     'as' => 'train', 'uses' => 'MlController@trainTest'
 ]);
+
+Route::get('teach/dogs',[
+    'as' => 'allDogs', 'uses' => 'MlController@allDogs'
+]);
