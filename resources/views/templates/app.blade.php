@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
   	<link rel="stylesheet" href="{{asset('css/style.css')}}" />
   	<link rel="stylesheet" href="{{asset('css/product.css')}}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
    	<title>Siberian neuron - @yield('title')</title>
     <style>
       @yield('style')
@@ -16,7 +17,10 @@
   <body>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="{{ url('/') }}">Sib Neuron</a>
+      <a class="navbar-brand" href="{{ url('/') }}">
+        <i class="fas fa-images"></i>
+        Siberian Neuron
+      </a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -46,7 +50,7 @@
     <footer class="container py-5">
       <div class="row">
         <div class="col-12 col-md-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mb-2"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+          <i class="fas fa-images fa-2x"></i>
           <small class="d-block mb-3 text-muted">Powered by Fulliton &copy; 2018</small>
         </div>
         <div class="col-md-8">
@@ -60,7 +64,6 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/') }}">Поддержка</a>
             </li>
-            
           </ul>
         </div>
       </div>

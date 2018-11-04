@@ -34,6 +34,6 @@ Route::get('vkauth', function () {
     echo "<a href='{$auth->getUrl()}'>ClickMe<a>";
 });
 
-Route::get('very', function(Auth, $auth) {
+Route::get('very', function(Auth $auth) {
 	$token = $auth->getToken($_GET['code']);
 });
