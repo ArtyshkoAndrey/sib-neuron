@@ -50,8 +50,7 @@
     <footer class="container py-5">
       <div class="row">
         <div class="col-12 col-md">
-          <i class="fas fa-images fa-2x"></i>
-          <small class="d-block mb-3 text-muted">Fulliton &copy; 2018</small>
+          <small class="d-block mb-3 text-muted">Powered by Fulliton &copy; 2018</small>
         </div>
         <div class="col-6 col-md-2">
           <h5>Основные</h5>

@@ -29,7 +29,7 @@ Route::get('teach/dogs',[
 ]);
 
 Route::get('vkauth', function () {
-    $auth = new Auth(6740551, 'nFGHhzyGYsi1pnRh9AXe', 'http://95.188.80.41/very');
+    $auth = new Auth(env('VKONTAKTE_KEY'), env('VKONTAKTE_SECRET'), env('VKONTAKTE_REDIRECT_URI'));
 
     echo "<a href='{$auth->getUrl()}'>ClickMe<a>";
 });
