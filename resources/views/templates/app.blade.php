@@ -49,21 +49,16 @@
 
     <footer class="container py-5">
       <div class="row">
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md">
           <i class="fas fa-images fa-2x"></i>
-          <small class="d-block mb-3 text-muted">Powered by Fulliton &copy; 2018</small>
+          <small class="d-block mb-3 text-muted">Fulliton &copy; 2018</small>
         </div>
-        <div class="col-md-8">
-          <ul class="nav justify-content-end">
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('/') }}">Главная</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('teach') }}">Обучение</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('/') }}">Поддержка</a>
-            </li>
+        <div class="col-6 col-md-2">
+          <h5>Основные</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="/">Главная</a></li>
+            <li><a class="text-muted" href="/teach">Обучение</a></li>
+            <li><a class="text-muted" href="/">Вход</a></li>
           </ul>
         </div>
       </div>
