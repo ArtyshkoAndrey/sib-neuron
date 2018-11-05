@@ -33,7 +33,7 @@
     </div>
 </section>
 <section class="container h-100">
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row row">
         <div class="d-flex flex-column col-md-7 align-self-center">
             <p>Всегда приятно получить в подарок от близкого человека видеоролик, сделанный из совместных фотографий. Да и преподнести кому-нибудь такой подарок не менее приятно, ведь создание видеоролика из фотографий своими руками – очень интересный и увлекательный процесс.</p>
             <p>Превратите свой цифровой фотоальбом в яркое и запоминающееся слайд-шоу с Видеоредактором Movavi! Чтобы самостоятельно создать видео из фото, вам нужно скачать программу и выполнить всего пять простых шагов.</p>
@@ -51,20 +51,20 @@
   </div>
   <div class="row">
     <div class="col-10 offset-1">
-      <div class="d-flex flex-row text-center py-5">
-        <div class="d-flex flex-column col-md-4 align-items-center">
+      <div class="d-flex flex-row row text-center">
+        <div class="d-flex flex-column col-md-4 align-items-center my-5">
           <img class="rounded-circle block-center" src="{{asset('images/person/artyshko.jpg')}}" alt="Generic placeholder image" width="140" height="140">
           <h3 class="pt-2">Артышко Андрей</h3>
           <p class="text">Тимлид, основатель сервиса, главный разработчик, разработчик серверной части сервиса, а так же нейроной сети</p>
           <a class="btn btn-secondary mt-auto" target="_blank" href="https://artyshko.ru" role="button">Подробней »</a>
         </div>
-        <div class="d-flex flex-column col-md-4 align-items-center">
+        <div class="d-flex flex-column col-md-4 align-items-center my-5">
           <img class="rounded-circle" src="{{asset('images/person/mironov.jpg')}}" alt="Generic placeholder image" width="140" height="140">
           <h3 class="pt-2">Миронов Даниил</h3>
           <p class="text">Фронтенд разраб. хз что дальше ден придумай сам</p>
           <a class="btn btn-secondary mt-auto" target="_blank" href="https://vk.com/hugant" role="button">Подробней »</a>
         </div><!-- /.col-lg-4 -->
-        <div class="d-flex flex-column col-md-4 align-items-center">
+        <div class="d-flex flex-column col-md-4 align-items-center my-5">
           <img class="rounded-circle" src="{{asset('images/person/sacyk.jpg')}}" alt="Generic placeholder image" width="140" height="140">
           <h3 class="pt-2">Сацук Михаил</h3>
           <p class="text">копирайтер</p>
