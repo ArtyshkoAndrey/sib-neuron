@@ -34,6 +34,24 @@ Route::get('vkauth', function () {
     echo "<a href='{$auth->getUrl()}'>ClickMe<a>";
 });
 
-Route::get('very', function(Auth $auth) {
-	$token = $auth->getToken($_GET['code']);
+Route::get('very', function() {
+	if (isset($_GET['code'])) {
+    $params = array(
+        'client_id' => $client_id,
+        'client_secret' => $client_secret,
+        'code' => $_GET['code'],
+        'redirect_uri' => $redirect_uri
+    );
+
+    $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
+
+    if (isset($token['access_token'])) {
+        $params = array(
+            'uids'         => $token['user_id'],
+            'fields'       => 'uid,first_name,last_name,screen_name,sex,bdate,photo_big',
+            'access_token' => $token['access_token']
+        );
+        return $params;
+    }
+}
 });
