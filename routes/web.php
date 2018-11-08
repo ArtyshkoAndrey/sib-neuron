@@ -1,6 +1,5 @@
 <?php
-use Phpml\Classification\KNearestNeighbors;
-use ATehnix\VkClient\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,12 +27,5 @@ Route::get('teach/dogs',[
     'as' => 'allDogs', 'uses' => 'MlController@allDogs'
 ]);
 
-Route::get('vkauth', function () {
-    $auth = new Auth(env('VKONTAKTE_KEY'), env('VKONTAKTE_SECRET'), env('VKONTAKTE_REDIRECT_URI'));
-
-    echo "<a href='{$auth->getUrl()}'>ClickMe<a>";
-});
-
-Route::get('very', function(Auth $auth) {
-	$token = $auth->getToken($_GET['code']);
-});
+Route::get('login/vk', 'Auth\LoginController@redirectToProvider')->name('login');
+Route::get('login/vk/callback', 'Auth\LoginController@handleProviderCallback');

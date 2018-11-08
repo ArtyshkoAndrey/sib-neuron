@@ -10,9 +10,21 @@ use Phpml\ModelManager;
 use Illuminate\Http\Request;
 use App\Image2Ml;
 use App\ImageParser;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class MlController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function teach()
     {
         //if(!rand(0,1))
