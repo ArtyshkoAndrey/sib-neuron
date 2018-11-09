@@ -32,9 +32,15 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('teach') }}">Обучение</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Вход</a>
-          </li>
+          @guest
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('login') }}">Вход</a>
+            </li>
+          @else
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('logout') }}">Выход</a>
+            </li>
+          @endguest
         </ul>
         <form class="form-inline mt-2 mt-md-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Найти" aria-label="Search">
@@ -55,9 +61,9 @@
         <div class="col-6 col-md-2">
           <h5>Основные</h5>
           <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="/">Главная</a></li>
-            <li><a class="text-muted" href="/teach">Обучение</a></li>
-            <li><a class="text-muted" href="/">Вход</a></li>
+            <li><a class="text-muted" href="{{ url('/') }}">Главная</a></li>
+            <li><a class="text-muted" href="{{ route('teach') }}">Обучение</a></li>
+            <li><a class="text-muted" href="{{ route('login') }}">Вход</a></li>
           </ul>
         </div>
       </div>
