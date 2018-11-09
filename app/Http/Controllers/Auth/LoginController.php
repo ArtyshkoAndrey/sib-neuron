@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use Socialite;
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class LoginController extends Controller
 {
@@ -50,5 +52,10 @@ class LoginController extends Controller
             auth()->login($newUser, true);
         }
         return redirect()->to('/');
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect('/');
     }
 }
