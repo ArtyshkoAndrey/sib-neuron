@@ -33,20 +33,24 @@ class LoginController extends Controller
             return redirect('/');
         }
 
+
         // check if they're an existing user
         $existingUser = User::where('email', $user->accessTokenResponseBody['email'])->first();
 
         if($existingUser){
             // log them in
+            $existingUser->vk_token = $user->token;
+            $existingUser->save();
             auth()->login($existingUser, true);
         } else {
             // create a new user
             $newUser                  = new User;
-            $newUser->name      = $user->name;
+            $newUser->name            = $user->name;
             $newUser->screen_name     = $user->user['screen_name'];
             $newUser->email           = $user->accessTokenResponseBody['email'];
             $newUser->vk_id           = $user->id;
             $newUser->avatar          = $user->avatar;
+            $newUser->vk_token           = $user->token;
             $newUser->save();
 
             auth()->login($newUser, true);

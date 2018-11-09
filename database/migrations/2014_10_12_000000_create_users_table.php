@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->text('screen_name');
             $table->integer('vk_id');
             $table->text('avatar');
+            $table->text('vk_token');
             $table->rememberToken();
             $table->timestamps();
         });

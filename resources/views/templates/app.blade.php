@@ -9,6 +9,7 @@
   	<link rel="stylesheet" href="{{asset('css/style.css')}}" />
   	<link rel="stylesheet" href="{{asset('css/product.css')}}" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    @yield('link')
    	<title>Siberian neuron - @yield('title')</title>
     <style>
       @yield('style')
@@ -37,6 +38,9 @@
               <a class="nav-link" href="{{ route('login') }}">Вход</a>
             </li>
           @else
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('user') }}">Профиль</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('logout') }}">Выход</a>
             </li>
@@ -68,8 +72,17 @@
         </div>
       </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="{{asset('js/jquery-slim.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('js/popper.min.js')}}"></script>
+    <!-- <script src="{{asset('js/bootstrap.min.js')}}"></script> -->
+    <!-- <script src="{{asset('js/popper.min.js')}}"></script> -->
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/material-photo-gallery.min.js"></script>
+    <script>
+      var elem = document.querySelector('.m-p-g');
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var gallery = new MaterialPhotoGallery(elem);
+      });
+    </script>
   </body>
 </html>

@@ -23,8 +23,12 @@ Route::post('train',[
     'as' => 'train', 'uses' => 'MlController@trainTest'
 ]);
 
-Route::get('teach/dogs',[
-    'as' => 'allDogs', 'uses' => 'MlController@allDogs'
+Route::get('user',[
+    'as' => 'user', 'uses' => 'HomeController@user'
+]);
+
+Route::get('user/photo',[
+    'as' => 'user_photos', 'uses' => 'HomeController@user_photos'
 ]);
 
 Route::get('login/vk', 'Auth\LoginController@redirectToProvider')->name('login');
