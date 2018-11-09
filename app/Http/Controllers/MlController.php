@@ -84,28 +84,4 @@ class MlController extends Controller
         }
         return redirect('teach');
     }
-
-    public function allDogs() {
-
-        $content = file_get_contents('http://image-net.org/api/text/imagenet.synset.geturls?wnid=n07942152');
-        $search = explode("\r\n", $content);
-
-        $labels = array();
-        $simple = array();
-
-        for($i=300; $i< 390; $i++) {
-            if (@fopen($search[$i], "r")) {
-                $im[$i] = new Image2Ml($search[$i]);
-                $simple[$i] = $im[$i]->grayScalePixels();
-                $labels[$i] = 'people';
-            }
-        }
-
-        $modelManager = new ModelManager();
-        $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/data');
-        $classifier->train($simple, $labels);
-        $modelManager->saveToFile($classifier, public_path() . '/neuron/data');
-
-        return 'true';
-    }
 }
