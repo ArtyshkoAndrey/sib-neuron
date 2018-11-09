@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use App\Photo;
 
 class LoginController extends Controller
 {
@@ -41,6 +42,7 @@ class LoginController extends Controller
             // log them in
             $existingUser->vk_token = $user->token;
             $existingUser->save();
+
             auth()->login($existingUser, true);
         } else {
             // create a new user
@@ -52,6 +54,25 @@ class LoginController extends Controller
             $newUser->avatar          = $user->avatar;
             $newUser->vk_token           = $user->token;
             $newUser->save();
+
+            $params = array(
+              'v' => '5.77', // Версия API
+              'access_token' => $newUser->vk_token, // Токен
+              'owner_id' => $newUser->vk_id, // ID пользователя
+              'album_id' => 'wall',
+              'rev' => 1,
+              'count' => 50
+            );
+            $query = file_get_contents('https://api.vk.com/method/photos.get?' . http_build_query($params)); 
+            $result = json_decode($query,true);
+
+            foreach ($result['response']['items'] as $photo) {
+                $photos = new Photo();
+                $photos->url = $photo['sizes'][4]['url'];
+                $photos->th_url = $photo['sizes'][1]['url'];
+                $photos->user_id = $newUser->id;
+                $photos->save();
+            }
 
             auth()->login($newUser, true);
         }

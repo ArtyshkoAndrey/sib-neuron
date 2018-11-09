@@ -263,8 +263,8 @@
       </div>
       <div class="m-p-g">
         <div class="m-p-g__thumbs" data-google-image-layout data-max-height="350">
-          @foreach($result['response']['items'] as $photos)
-            <img src="{{ $photos['sizes'][1]['url'] }}" data-full="{{ $photos['sizes'][4]['url'] }}" class="m-p-g__thumbs-img img-thumbnail" />
+          @foreach(Auth::user()->photos as $photo)
+            <img src="{{ $photo['th_url'] }}" data-full="{{ $photo['url'] }}" class="m-p-g__thumbs-img img-thumbnail" />
           @endforeach
         </div>
 
