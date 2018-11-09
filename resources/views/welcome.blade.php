@@ -15,7 +15,7 @@
   <div class="col-md-5 p-lg-5 mx-auto my-5">
     <h1 class="display-5 font-weight-normal">Siberian neuron</h1>
     <p class="lead font-weight-normal">Загружайте свои фотографии и выбирайте шаблон слайд-шоу. Из них мы сделаем красивое видео, которое вы сможете скачать.</p>
-    <a class="btn btn-outline-success text-white" href="/login">Создать проект</a>
+    <a class="btn btn-outline-success text-white" href="{{ route('login') }}">Создать проект</a>
   </div>
 </div>
 <section class="container py-5">
@@ -27,7 +27,7 @@
     <div class="row py-3">
         <div class="col-12">
             <div class="p text-center">
-                Фото и видео с разрешением до 16 Мпикс. и 1080p HD можно бесплатно загружать в неограниченном количестве в надежное хранилище. Они доступны вам в любое время с любого телефона, планшета или компьютера на сайте photos.google.com.
+                Фото и видео можно бесплатно загружать в неограниченном количестве в надежное хранилище. Они доступны вам в любое время с любого телефона, планшета или компьютера.
             </div>
         </div>
     </div>
