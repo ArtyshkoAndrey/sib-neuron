@@ -29,3 +29,4 @@ Route::get('teach/dogs',[
 
 Route::get('login/vk', 'Auth\LoginController@redirectToProvider')->name('login');
 Route::get('login/vk/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
