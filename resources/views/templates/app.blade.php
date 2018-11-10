@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -74,8 +74,8 @@
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="{{asset('js/jquery-slim.min.js')}}"></script>
-    <!-- <script src="{{asset('js/bootstrap.min.js')}}"></script> -->
-    <!-- <script src="{{asset('js/popper.min.js')}}"></script> -->
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/popper.min.js')}}"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/material-photo-gallery.min.js"></script>
     <script>
       var elem = document.querySelector('.m-p-g');
