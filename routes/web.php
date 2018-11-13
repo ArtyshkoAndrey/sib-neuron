@@ -14,7 +14,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
 Route::get('teach',[
     'as' => 'teach', 'uses' => 'MlController@teach'
 ]);
@@ -23,13 +23,14 @@ Route::post('train',[
     'as' => 'train', 'uses' => 'MlController@trainTest'
 ]);
 
-Route::get('user',[
-    'as' => 'user', 'uses' => 'HomeController@user'
-]);
-
-Route::get('user/photo',[
-    'as' => 'user_photos', 'uses' => 'HomeController@user_photos'
-]);
+Route::group(['middleware' => ['breadcrumbs']], function () {
+  Route::get('user',[
+      'as' => 'user', 'uses' => 'HomeController@user'
+  ]);
+  Route::get('user/photo/vk',[
+      'as' => 'user_photos_vk', 'uses' => 'HomeController@user_photos_vk'
+  ]);
+});
 
 Route::get('login/vk', 'Auth\LoginController@redirectToProvider')->name('login');
 Route::get('login/vk/callback', 'Auth\LoginController@handleProviderCallback');
