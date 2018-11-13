@@ -56,7 +56,7 @@ class MlController extends Controller
     {
         if ($request->isMethod('post')) {
 
-            if (file_exists(public_path() . '/neuron/data') && $request->options != 'error') {
+            if (file_exists(public_path() . '/neuron/model.data') && $request->options != 'error') {
 
                 $file = $request->image;
                 $label = array((string)$request->options);
@@ -75,10 +75,9 @@ class MlController extends Controller
 //                    true            // $probabilityEstimates, set to true
 //                );
                 $modelManager = new ModelManager();
-                $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/data');
+                $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/model.data');
                 $classifier->train($trainedData, $label);
-                $modelManager->saveToFile($classifier, public_path() . '/neuron/data');
-
+                $modelManager->saveToFile($classifier, public_path() . '/neuron/model.data');
 
             }
         }
