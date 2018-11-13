@@ -1,4 +1,4 @@
-@extends('templates.app')
+@extends('dashboard.templates.app')
 
 @section('title', "Фотографии " . Auth::user()->screen_name)
 
@@ -39,7 +39,7 @@
   }
   .m-p-g__fullscreen {
     position: fixed;
-    z-index: 100;
+    z-index: 199;
     top: 0;
     left: 0;
     right: 0;
@@ -222,45 +222,10 @@
   }
 @stop
 
-@section('link')
-  <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-@stop
-
 @section('content')
     
 <div class="container-fluid">
   <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-      <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <div class="nav-link">
-              <div class="user-wrapper">
-                <img src="{{Auth::user()->avatar}}" class="img-fluid d-inline rounded-circle" alt="">
-                <p class="d-inline text-truncate pl-2" style="max-width: 120px">{{ Auth::user()->name }}</p>
-              </div>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('user') }}">
-              <i class="fas fa-tachometer-alt"></i>
-              Глвная панель <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ route('user_photos') }}">
-              <i class="fas fa-image"></i>
-              Фотографии
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="h2">Ваши фотографии</h1>
-      </div>
       <div class="m-p-g">
         <div class="m-p-g__thumbs" data-google-image-layout data-max-height="350">
           @foreach(Auth::user()->photos as $photo)
@@ -270,8 +235,7 @@
 
         <div class="m-p-g__fullscreen"></div>
       </div>
-    </main>
+    </div>
   </div>
-</div>
 
 @stop
