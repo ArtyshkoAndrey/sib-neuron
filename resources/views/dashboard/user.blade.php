@@ -1,50 +1,63 @@
-@extends('templates.app')
+@extends('dashboard.templates.app')
 
 @section('title', "Пользователь " . Auth::user()->screen_name)
 
-@section('link')
-  <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-@stop
-
 @section('content')
-    
-<div class="container-fluid">
-  <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-      <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <div class="nav-link">
-              <div class="user-wrapper">
-                <img src="{{Auth::user()->avatar}}" class="img-fluid d-inline rounded-circle" alt="">
-                <p class="d-inline text-truncate pl-2" style="max-width: 120px">{{ Auth::user()->name }}</p>
-              </div>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ route('user') }}">
-              <i class="fas fa-tachometer-alt"></i>
-              Глвная панель <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('user_photos') }}">
-              <i class="fas fa-image"></i>
-              Фотографии
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-      </div>
+<section class="content">
+  <div class="container-fluid">
+    <h5 class="mb-2">Персональная информация</h5>
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-info"><i class="fas fa-images"></i></span>
 
-      <h2>Section title</h2>
-    </main>
+          <div class="info-box-content">
+            <span class="info-box-text">Фотографий в ВК</span>
+            <span class="info-box-number">{{count(Auth::user()->photos)}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-info"><i class="fas fa-images"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Обр. фотографий</span>
+            <span class="info-box-number">{{rand(1, 100)}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-info"><i class="fas fa-images"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Видеозаписи</span>
+            <span class="info-box-number">{{rand(1, 10)}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-info"><i class="fas fa-images"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Баллы</span>
+            <span class="info-box-number">{{rand(1, 99999)}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
 @stop
