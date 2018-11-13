@@ -19,8 +19,9 @@
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <a class="navbar-brand" href="{{ url('/') }}">
-        <i class="fas fa-images"></i>
-        Siberian Neuron
+        <img src="{{asset('images/logo.png')}}" alt="Logo sib_neuron" class="brand-image"
+             style="opacity: .8; height: 30px" >
+        <span class="brand-text font-weight-light">Siberian Neuron</span>
       </a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -28,21 +29,21 @@
       <div class="navbar-collapse collapse" id="navbarCollapse" style="">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('/') }}">Главная <span class="sr-only">(current)</span></a>
+            <a class="nav-link {{active('index')}}" href="{{ route('index') }}">Главная <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('teach') }}">Обучение</a>
+            <a class="nav-link {{active('teach')}}" href="{{ route('teach') }}">Обучение</a>
           </li>
           @guest
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('login') }}">Вход</a>
+              <a class="nav-link {{active('login')}}" href="{{ route('login') }}">Вход</a>
             </li>
           @else
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('user') }}">Профиль</a>
+              <a class="nav-link {{active('user')}}" href="{{ route('user') }}">Профиль</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('logout') }}">Выход</a>
+              <a class="nav-link {{active('logout')}}" href="{{ route('logout') }}">Выход</a>
             </li>
           @endguest
         </ul>
