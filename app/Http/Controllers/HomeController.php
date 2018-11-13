@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Photo;
+use Request;
 
 class HomeController extends Controller
 {
@@ -20,11 +22,13 @@ class HomeController extends Controller
   }
 
   public function user() {
-
-    return view('dashboard.user');
+    $breadcrumbs = Request::Get('breadcrumbs');
+    return view('dashboard.user', compact('breadcrumbs'));
   }
 
-  public function user_photos() {
-    return view('dashboard.user_photos', compact('result'));
+  public function user_photos_vk() {
+    $breadcrumbs = Request::Get('breadcrumbs');
+    $photos = Photo::where('user_id', Auth::id())->paginate(25);
+    return view('dashboard.user_photos', compact('breadcrumbs', 'photos'));
   }
 }
