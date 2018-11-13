@@ -177,7 +177,7 @@
   .m-p-g__thumbs {
      /* Prevent vertical gaps */
      line-height: 0;
-     
+
      -webkit-column-count: 5;
      -webkit-column-gap:   0px;
      -moz-column-count:    5;
@@ -223,17 +223,20 @@
 @stop
 
 @section('content')
-    
+
 <div class="container-fluid">
   <div class="row">
       <div class="m-p-g">
         <div class="m-p-g__thumbs" data-google-image-layout data-max-height="350">
-          @foreach(Auth::user()->photos as $photo)
+          @foreach($photos as $photo)
             <img src="{{ $photo['th_url'] }}" data-full="{{ $photo['url'] }}" class="m-p-g__thumbs-img img-thumbnail" />
           @endforeach
         </div>
 
         <div class="m-p-g__fullscreen"></div>
+      </div>
+      <div class="col-12">
+        {{ $photos->links('dashboard.templates.paginate') }}
       </div>
     </div>
   </div>
