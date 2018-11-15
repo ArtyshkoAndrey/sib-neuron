@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-// use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
 use Request;
+use App\Photo;
+use App\Image2Ml;
+use Phpml\ModelManager;
 
 class AlbumsController extends Controller
 {
@@ -33,7 +37,18 @@ class AlbumsController extends Controller
      */
     public function create()
     {
-        //
+        $modelManager = new ModelManager();
+        $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/model.data');
+        $photos = Photo::where('user_id', Auth::id())->get();
+        $i =0;
+        foreach($photos as $photo) {
+            $im = new Image2Ml($photo['th_url']);
+            $trainedData = $im->grayScalePixels();
+            $label[$i] = $classifier->predict($trainedData);
+            $i++;
+        }
+
+        return $label;
     }
 
     /**

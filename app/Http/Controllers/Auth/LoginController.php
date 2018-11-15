@@ -59,9 +59,8 @@ class LoginController extends Controller
               'v' => '5.77', // Версия API
               'access_token' => $newUser->vk_token, // Токен
               'owner_id' => $newUser->vk_id, // ID пользователя
-              'album_id' => 'wall',
-              'rev' => 1,
-              'count' => 50
+              'album_id' => 'profile',
+              'rev' => 1
             );
             $query = file_get_contents('https://api.vk.com/method/photos.get?' . http_build_query($params)); 
             $result = json_decode($query,true);
@@ -74,9 +73,27 @@ class LoginController extends Controller
                 $photos->save();
             }
 
+            $params = array(
+                'v' => '5.77', // Версия API
+                'access_token' => $newUser->vk_token, // Токен
+                'owner_id' => $newUser->vk_id, // ID пользователя
+                'album_id' => 'wall',
+                'rev' => 1
+              );
+              $query = file_get_contents('https://api.vk.com/method/photos.get?' . http_build_query($params)); 
+              $result = json_decode($query,true);
+  
+              foreach ($result['response']['items'] as $photo) {
+                  $photos = new Photo();
+                  $photos->url = $photo['sizes'][4]['url'];
+                  $photos->th_url = $photo['sizes'][1]['url'];
+                  $photos->user_id = $newUser->id;
+                  $photos->save();
+              } 
+
             auth()->login($newUser, true);
         }
-        return redirect()->to('/');
+        return redirect()->to('/user');
     }
 
     public function logout() {

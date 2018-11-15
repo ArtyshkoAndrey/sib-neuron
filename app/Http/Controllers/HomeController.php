@@ -23,7 +23,8 @@ class HomeController extends Controller
 
   public function user() {
     $breadcrumbs = Request::Get('breadcrumbs');
-    return view('dashboard.user', compact('breadcrumbs'));
+    $users = User::all();
+    return view('dashboard.user', compact('breadcrumbs','users'));
   }
 
   public function user_photos_vk() {

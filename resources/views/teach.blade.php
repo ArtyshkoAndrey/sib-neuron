@@ -20,15 +20,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 pt-2">
+                @if (session('status'))
+                    <div class="alert alert-danger">
+                        {{ session('status') }}
+                    </div>
+                @endif
                     <form action='{{ route("train") }}' method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group text-center">
                             <img src="{{ $im }}" class="img-thumbnail" alt="images" style="max-height: 300px;">
-                            {{--@if($maximus > 0.7)--}}
-                                {{--<p>Возможно это <strong>{{ $predict }}</strong> - {{ $maximus }}</p>--}}
-                            {{--@else--}}
-                                {{--<p>Нейронной сети не удалось определить <strong>{{ $predict }}</strong> - {{ $maximus }}</p>--}}
-                            {{--@endif--}}
                             <input type="text" name="image" value="{{ $im }}" id="exampleFormControlFile1" hidden>
                         </div>
                         <div class="form-group text-center">
