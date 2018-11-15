@@ -40,6 +40,22 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('albums.index')}}" class="nav-link {{ active('albums.index') }}">
+              <i class="nav-icon far fa-images"></i>
+              <p>
+                Альбомы
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('user_photos_new_video')}}" class="nav-link {{ active('user_photos_new_video') }}">
+              <i class="nav-icon far fa-file-video"></i>
+              <p>
+                Создать видео
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

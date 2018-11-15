@@ -44,6 +44,18 @@ class BreadCrumbs
                     case 'user' :
                         $crumbs[$key]['text'] = 'Пользователь';
                         break;
+                    case 'edit' :
+                        $crumbs[$key]['text'] = 'Редактировать';
+                        break;
+                    case 'new' :
+                        $crumbs[$key]['text'] = 'Создать';
+                        break;
+                    case 'albums' :
+                        $crumbs[$key]['text'] = 'Альбомы';
+                        break;
+                    case 'new-video' :
+                        $crumbs[$key]['text'] = 'Создать видео';
+                        break;
                     case 'photo' :
                         $crumbs[$key]['text'] = 'Фото';
                         $crumbs[$key]['url'] = null;

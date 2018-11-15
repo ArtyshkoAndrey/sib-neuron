@@ -31,4 +31,9 @@ class HomeController extends Controller
     $photos = Photo::where('user_id', Auth::id())->paginate(25);
     return view('dashboard.user_photos', compact('breadcrumbs', 'photos'));
   }
+
+  public function user_photos_new_video() {
+    $breadcrumbs = Request::Get('breadcrumbs');
+    return view('dashboard.user', compact('breadcrumbs'));
+  }
 }
