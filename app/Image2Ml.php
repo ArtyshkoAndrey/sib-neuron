@@ -38,6 +38,7 @@ class Image2Ml {
         $this->imageUrl = $imageUrl;
         $this->pathInfo = pathinfo($this->imageUrl);
         $this->im = $this->imageCreateFromAny($this->imageUrl);
+        $this->im = $this->createsquarethumbnail();
         $this->im = $this->resizeImage();
     }
 
@@ -97,5 +98,29 @@ class Image2Ml {
         }
 //        unlink($this->imageUrl);
         return array(array_slice($cur_array, 1));
+    }
+
+    function createsquarethumbnail() {
+        $compression = "gd2";
+        $origimage = $this->im;
+        $new_size = $old_x = imagesx($origimage);
+        $old_y = imagesy($origimage);
+
+        $x = 0; $y = 0;
+
+        if ($old_x > $old_y) {
+                $x = ceil(($old_x - $old_y) / 2);
+                $old_x = $old_y;
+        } elseif ($old_y > $old_x) {
+                $y = ceil(($old_y - $old_x) / 2);
+                $old_y = $old_x;
+        }
+        $new_image = imagecreatetruecolor($new_size,$new_size);
+        if ($this->type == 3 && $compression != "gd1") {
+                imagealphablending($new_image, false);
+                imagesavealpha($new_image, true);
+        }
+        imagecopyresampled($new_image,$origimage,0,0,$x,$y,$new_size,$new_size,$old_x,$old_y);
+        return $new_image;
     }
 }

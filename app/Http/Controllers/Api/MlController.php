@@ -10,7 +10,6 @@ use Phpml\ModelManager;
 use Illuminate\Http\Request;
 use App\Image2Ml;
 use App\ImageParser;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 
 class MlController extends Controller
@@ -53,7 +52,7 @@ class MlController extends Controller
 }
 
 
-// $modelManager = new ModelManager();
+        // $modelManager = new ModelManager();
         // $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/data');
         // $binP = base_path() ."/vendor/php-ai/php-ml/bin/libsvm";
         // $varP = base_path() ."/vendor/php-ai/php-ml/var";

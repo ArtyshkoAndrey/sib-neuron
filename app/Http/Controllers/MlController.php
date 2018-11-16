@@ -3,15 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Phpml\Classification\KNearestNeighbors;
-use Phpml\Classification\SVC;
-use Phpml\SupportVectorMachine\Kernel;
-use Phpml\ModelManager;
-use Illuminate\Http\Request;
-use App\Image2Ml;
 use App\ImageParser;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
 
 class MlController extends Controller
 {
@@ -34,29 +27,6 @@ class MlController extends Controller
         $im = $im->setIm();
 
         return view('teach', compact('im'));
-    }
-
-    public function trainTest(Request $request)
-    {
-        //Заглушка редирект назад с ошибкой
-        // return back()->with('status', 'Обучение приостоновлено!! Доступ откроется в 3 часа по МСК');
-        if ($request->isMethod('post')) {
-
-            if (file_exists(public_path() . '/neuron/model.data') && $request->options != 'error') {
-
-                $file = $request->image;
-                $label = array((string)$request->options);
-
-                $im = new Image2Ml($file);
-                $trainedData = $im->grayScalePixels();
-                $modelManager = new ModelManager();
-                $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/model.data');
-                $classifier->train($trainedData, $label);
-                $modelManager->saveToFile($classifier, public_path() . '/neuron/model.data');
-
-            }
-        }
-        return redirect('teach');
     }
 }
 

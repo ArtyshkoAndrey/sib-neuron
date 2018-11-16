@@ -6,8 +6,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link rel="icon" type="image/png" href="{{asset('images/logo.png')}}" />
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
-  	<link rel="stylesheet" href="{{asset('css/style.css')}}" />
   	<link rel="stylesheet" href="{{asset('css/product.css')}}" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     @yield('link')
