@@ -79,9 +79,8 @@ class Image2Ml {
             throw new Exception("Unable to resize file : {$this->imageUrl}.\n");
         }
 
-        imagecopyresampled($im, $this->im, 0, 0, 0, 0,
-            $this->size, $this->size, $this->w, $this->h);
-
+        imagecopyresampled($im, $this->im, 0, 0, 0, 0,$this->size, $this->size, $this->w, $this->h);
+        imagejpeg($im, public_path() . "/test.jpg",100);
         return $im;
     }
 
@@ -103,17 +102,17 @@ class Image2Ml {
     function createsquarethumbnail() {
         $compression = "gd2";
         $origimage = $this->im;
-        $new_size = $old_x = imagesx($origimage);
+        $old_x = imagesx($origimage);
         $old_y = imagesy($origimage);
 
         $x = 0; $y = 0;
 
         if ($old_x > $old_y) {
                 $x = ceil(($old_x - $old_y) / 2);
-                $old_x = $old_y;
+                $old_x = $new_size = $old_y;
         } elseif ($old_y > $old_x) {
                 $y = ceil(($old_y - $old_x) / 2);
-                $old_y = $old_x;
+                $old_y = $new_size = $old_x;
         }
         $new_image = imagecreatetruecolor($new_size,$new_size);
         if ($this->type == 3 && $compression != "gd1") {
@@ -121,6 +120,7 @@ class Image2Ml {
                 imagesavealpha($new_image, true);
         }
         imagecopyresampled($new_image,$origimage,0,0,$x,$y,$new_size,$new_size,$old_x,$old_y);
+        $this->w = $this->h = $new_size;
         return $new_image;
     }
 }
