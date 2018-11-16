@@ -39,3 +39,5 @@ Route::group(['middleware' => ['breadcrumbs']], function () {
 Route::get('login/vk', 'Auth\LoginController@redirectToProvider')->name('login');
 Route::get('login/vk/callback', 'Auth\LoginController@handleProviderCallback');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::post('api/train', 'Api\MlController@train');

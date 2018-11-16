@@ -17,6 +17,11 @@
         </div>
     </div>
     <section>
+        <div class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered justify-content-center" role="document">
+                <span class="fa fa-spinner fa-spin fa-3x text-white"></span>
+            </div>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 pt-2">
@@ -25,26 +30,27 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                    <form action='{{ route("train") }}' method="post" enctype="multipart/form-data">
+                    <form method="POST" id="contactform">
                         @csrf
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group text-center">
-                            <img src="{{ $im }}" class="img-thumbnail" alt="images" style="max-height: 300px;">
-                            <input type="text" name="image" value="{{ $im }}" id="exampleFormControlFile1" hidden>
+                            <img src="{{ $im }}" class="img-thumbnail" alt="images" id="trainImage" style="max-height: 300px;">
+                            <input type="hidden" name="image" value="{{ $im }}" id="image">
                         </div>
                         <div class="form-group text-center">
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-secondary m-1 ">
-                                    <input type="radio" name="options" id="option1" value="people" autocomplete="off"> Человек
+                                    <input type="radio" class="label" name="options" id="option1" value="people" autocomplete="off"> Человек
                                 </label>
                                 <label class="btn btn-secondary m-1">
-                                    <input type="radio" name="options" id="option2" value="dog" autocomplete="off"> Собака
+                                    <input type="radio" class="label" name="options" id="option2" value="dog" autocomplete="off"> Собака
                                 </label>
                                 <label class="btn btn-secondary m-1">
-                                    <input type="radio" name="options" id="option3" value="error" autocomplete="off"> Нет
+                                    <input type="radio" class="label" name="options" id="option3" value="error" autocomplete="off"> Нет
                                 </label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Отправить</button>
+                        <button type="submit" id="train" class="btn btn-primary btn-block">Отправить</button>
                     </form>
                 </div>
             </div>
@@ -52,7 +58,7 @@
                 <div class="col-sm-10 offset-sm-1">
                     <div class="jumbotron">
                         <h1 class="display-4">Привет Друг!</h1>
-                        <p class="lead">Спасибо, что за зашёл на этот сайт. Если желаешь помочь развитию проекта, то необходимо следовать некоторым правилам</p>
+                        <p class="lead">Спасибо, что зашёл на этот сайт. Если желаешь помочь развитию проекта, то необходимо следовать некоторым правилам</p>
                         <hr class="my-4">
                         <p>В центре размещена картинки. Требуется внимательно посмотреть её, а выбрать вариант ответа</p>
                         <ul>
@@ -70,4 +76,34 @@
         </div>
     </section>
 
+@stop
+
+@section('footer')
+    <script>
+        $(document).ready(function(){
+            // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $("#contactform").on('submit', function(e){
+                e.preventDefault();
+                $('.modal').modal('show');
+                $.ajax({
+                    /* the route pointing to the post function */
+                    url: '/api/train',
+                    type: 'POST',
+                    /* send the csrf-token and the input to the controller */
+                    // data: {_token: CSRF_TOKEN, label:$(".label:checked").val(), image:$('#image')},
+                    data: $('#contactform').serialize(),
+                    dataType: 'JSON',
+                    /* remind that 'data' is the response of the AjaxController */
+                    success: function (data) { 
+                        $("#trainImage").attr("src",data.im);
+                        $("#image").val(data.im);
+                        console.log(data.msg + " " + data.im);
+                        setTimeout(function () {
+                            $('.modal').modal('hide');
+                        }, 1000);
+                    }
+                }); 
+            });
+       });    
+    </script>
 @stop

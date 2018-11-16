@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
   	<link rel="stylesheet" href="{{asset('css/style.css')}}" />
   	<link rel="stylesheet" href="{{asset('css/product.css')}}" />
@@ -74,16 +75,17 @@
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="{{asset('js/jquery-slim.min.js')}}"></script>
+    <!-- <script src="{{asset('js/jquery-slim.min.js')}}"></script> -->
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('js/popper.min.js')}}"></script>
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/material-photo-gallery.min.js"></script>
-    <script>
+    <!-- <script src="{{asset('js/popper.min.js')}}"></script> -->
+    <!-- <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/material-photo-gallery.min.js"></script> -->
+    <!-- <script>
       var elem = document.querySelector('.m-p-g');
 
       document.addEventListener('DOMContentLoaded', function() {
         var gallery = new MaterialPhotoGallery(elem);
       });
-    </script>
+    </script> -->
+    @yield('footer')
   </body>
 </html>
