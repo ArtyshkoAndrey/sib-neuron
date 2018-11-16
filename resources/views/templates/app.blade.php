@@ -62,14 +62,21 @@
     <footer class="container py-5">
       <div class="row">
         <div class="col-12 col-md">
-          <small class="d-block mb-3 text-muted">Powered by Fulliton &copy; 2018</small>
+          <small class="d-block mb-3 text-muted">Powered by Fulliton &copy; 2018 Все права защищены</small>
+          <p>Контакты технической поддержки: <a href="mailto:artyshko.andrey@gmail.com?subject=Проблемы&cc=artyshko.andrey@gmail.com">artyshko.andrey@gmail.com</a></p>
+          <p>Эл. адрес для общих запросов: <a href="mailto:admin@artyshko.ru?subject=Проблемы&cc=admin@artyshko.ru">admin@artyshko.ru</a></p>
         </div>
         <div class="col-6 col-md-2">
           <h5>Основные</h5>
           <ul class="list-unstyled text-small">
             <li><a class="text-muted" href="{{ url('/') }}">Главная</a></li>
             <li><a class="text-muted" href="{{ route('teach') }}">Обучение</a></li>
-            <li><a class="text-muted" href="{{ route('login') }}">Вход</a></li>
+            @guest
+              <li><a class="text-muted" href="{{ route('login') }}">Вход</a></li>
+            @else
+              <li><a class="text-muted" href="{{ route('user') }}">Профиль</a></li>
+              <li><a class="text-muted" href="{{ route('logout') }}">Выход</a></li>
+            @endguest
           </ul>
         </div>
       </div>
