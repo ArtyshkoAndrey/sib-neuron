@@ -17,14 +17,22 @@
         </div>
     </div>
     <section>
-        <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal1 modal fade" data-backdrop="static" data-focus="true" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered justify-content-center" role="document">
                 <span class="fa fa-spinner fa-spin fa-3x text-white"></span>
             </div>
         </div>
-        <div class="container">
+        <div class="modal2 modal fade bd-example-modal-lg" tabindex="-1" role="dialog" data-backdrop="static" data-focus="true" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered justify-content-center" role="document">
+                <!-- <span class="fa fa-spinner fa-spin fa-3x text-white"></span> -->
+                <div class="modal-content" style="height:90vh">
+                    <iframe src="https://100js.artyshko.ru/day/arkanoid"  style="height:90vh" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 offset-md-3 pt-2">
+                <div class="col-md-4 offset-md-4 p-2">
                 @if (session('status'))
                     <div class="alert alert-danger">
                         {{ session('status') }}
@@ -51,25 +59,48 @@
                             </div>
                         </div>
                         <button type="submit" id="train" class="btn btn-primary btn-block">Отправить</button>
+
+                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#ruleModal">
+                            Правила обучения
+                        </button>
                     </form>
                 </div>
             </div>
-            <div class="row py-5">
-                <div class="col-sm-10 offset-sm-1">
-                    <div class="jumbotron">
-                        <h1 class="display-4">Привет Друг!</h1>
-                        <p class="lead">Спасибо, что зашёл на этот сайт. Если желаешь помочь развитию проекта, то необходимо следовать некоторым правилам</p>
-                        <hr class="my-4">
-                        <p>В центре размещена картинки. Требуется внимательно посмотреть её, а выбрать вариант ответа</p>
-                        <ul>
-                            <li>1. Человек - если человека хорошо виндо на фотографии. Присутствуют руки, плечи голова.</li>
-                            <li>2. Собака - как ты понял, собаку. Желательно что бы на фотографии была одна собака, и без посторонних людей</li>
-                            <li>3. Нет - это означает что на фотографии нет ни собаки ни человека.</li>
-                        </ul>
-
-                        <p class="lead">
-                            <a class="btn btn-primary btn-lg" href="{{url('https://vk.com/fulliton')}}" role="button">Написать отзыв</a>
-                        </p>
+        </div>
+        <div class="modal fade bd-example-modal-lg" id="ruleModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Правила обучения</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="jumbotron">
+                            <h1 class="display-4">Привет Друг!</h1>
+                            <p class="lead">Спасибо, что зашёл на этот сайт. Если желаешь помочь развитию проекта, то необходимо следовать некоторым правилам</p>
+                            <hr class="my-4">
+                            <p>В центре размещена картинки. Требуется внимательно посмотреть её, а выбрать вариант ответа</p>
+                            <ul>
+                                <li>1. Человек - если человека хорошо виндо на фотографии. Присутствуют руки, плечи голова.</li>
+                                <li>2. Собака - как ты понял, собаку. Желательно что бы на фотографии была одна собака, и без посторонних людей</li>
+                                <li>3. Нет - это означает что на фотографии нет ни собаки ни человека.</li>
+                            </ul>
+                            <p>Так как обучение длиться долго, Вы можете поиграть в игру Arkanoid, полная версия игры на сайте <a href="https://100js.artyshko.ru/day/arkanoid" target="_blank">100js</a></p>
+                            <p>Для смартфонов игра не доступна, в связи с адаптацией</p>
+                            <div class="row p-2">
+                                <div class="col-sm-6">
+                                    <img src="{{asset('images/game/1.png')}}" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-sm-6">
+                                    <img src="{{asset('images/game/2.png')}}" class="img-fluid" alt="">
+                                </div>
+                            </div>
+                            <p class="lead">
+                                <a class="btn btn-primary btn-lg" href="{{url('https://vk.com/fulliton')}}" role="button">Написать отзыв</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,10 +112,18 @@
 @section('footer')
     <script>
         $(document).ready(function(){
+            $('#ruleModal').modal('toggle')
             // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $("#contactform").on('submit', function(e){
                 e.preventDefault();
-                $('.modal').modal('show');
+                if($('.label:checked').val() !== 'error') {
+                    if($(window).width() > '1000')
+                        $('.modal2').modal('show');
+                    else
+                       $('.modal1').modal('show');
+                } else {
+                    $('.modal1').modal('show');
+                }
                 $.ajax({
                     /* the route pointing to the post function */
                     url: '/api/train',
@@ -99,7 +138,10 @@
                         $("#image").val(data.im);
                         console.log(data.msg + " " + data.im);
                         setTimeout(function () {
-                            $('.modal').modal('hide');
+                            $('.modal2').modal('hide');
+                            $('.modal1').modal('hide');
+                            $('.label').prop('checked', false);
+                            $('label').removeClass('active');
                         }, 1000);
                     }
                 }); 

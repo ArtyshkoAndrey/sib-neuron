@@ -39,8 +39,8 @@ class MlController extends Controller
                 $modelManager->saveToFile($classifier, public_path() . '/neuron/model.data');
                 $response['msg'] = "Тест траин пройден";
 
-            }
-            $response['msg'] = "Тест траин не пройден";
+            } else
+                $response['msg'] = "Тест траин не пройден";
         }
         if(!rand(0,1))
             $im = new ImageParser('https://pixabay.com/api/?key=10542644-549c54b5d387dd41892ea2b24&q=people&image_type=photo&cat=people&order=latest&per_page=50&page='.rand(1,6));

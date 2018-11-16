@@ -39,7 +39,7 @@ class MlController extends Controller
     public function trainTest(Request $request)
     {
         //Заглушка редирект назад с ошибкой
-        return back()->with('status', 'Обучение приостоновлено!! Доступ откроется в 3 часа по МСК');
+        // return back()->with('status', 'Обучение приостоновлено!! Доступ откроется в 3 часа по МСК');
         if ($request->isMethod('post')) {
 
             if (file_exists(public_path() . '/neuron/model.data') && $request->options != 'error') {
