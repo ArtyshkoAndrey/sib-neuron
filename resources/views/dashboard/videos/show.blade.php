@@ -12,7 +12,7 @@
 			<div class="row">
 				<div class="col-md-4 col-sm-6 col-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-info"><i class="fa fa-envelope-o"></i></span>
+						<span class="info-box-icon bg-info"><i class="fa fa-weight-hanging"></i></span>
 
 						<div class="info-box-content">
 							<span class="info-box-text">Размер видео</span>
@@ -23,7 +23,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-info"><i class="fa fa-envelope-o"></i></span>
+						<span class="info-box-icon bg-info"><i class="fa fa-clock"></i></span>
 
 						<div class="info-box-content">
 							<span class="info-box-text">Длительность</span>
@@ -34,7 +34,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-info"><i class="fa fa-envelope-o"></i></span>
+						<span class="info-box-icon bg-info"><i class="fa fa-images"></i></span>
 
 						<div class="info-box-content">
 							<span class="info-box-text">Фотографий</span>
