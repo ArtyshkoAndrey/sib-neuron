@@ -24,13 +24,17 @@ Route::post('train',[
 ]);
 
 Route::group(['middleware' => ['breadcrumbs']], function () {
+
   Route::get('user',[
       'as' => 'user', 'uses' => 'HomeController@user'
   ]);
+
   Route::get('user/photo/vk',[
       'as' => 'user_photos_vk', 'uses' => 'HomeController@user_photos_vk'
   ]);
+
   Route::resource('user/photo/albums','AlbumsController');
+
   Route::get('user/photo/new-video',[
       'as' => 'user_photos_new_video', 'uses' => 'HomeController@user_photos_new_video'
   ]);

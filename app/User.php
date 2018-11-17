@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Photo;
+use App\Albums;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -35,4 +38,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Photo');
     }
+
+    /**
+    * Получить комментарии статьи блога.
+    */
+    public function photos_dog()
+    {
+        $albums = Albums::where('category_id', 1)->where('user_id', Auth::id())->get();
+        return $albums;
+    }
+
 }

@@ -15,6 +15,9 @@ class CreateAlbumsTable extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('photo_id');
+            $table->integer('category_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

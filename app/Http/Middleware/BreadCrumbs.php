@@ -47,7 +47,7 @@ class BreadCrumbs
                     case 'edit' :
                         $crumbs[$key]['text'] = 'Редактировать';
                         break;
-                    case 'new' :
+                    case 'create' :
                         $crumbs[$key]['text'] = 'Создать';
                         break;
                     case 'albums' :
