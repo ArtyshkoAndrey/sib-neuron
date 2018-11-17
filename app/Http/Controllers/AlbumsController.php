@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Request;
 use App\Photo;
+use App\Category;
 use App\Albums;
 use App\Image2Ml;
 use Phpml\ModelManager;
