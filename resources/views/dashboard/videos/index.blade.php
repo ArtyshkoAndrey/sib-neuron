@@ -7,12 +7,7 @@
 	<section class="content">
 		<div class="container-fluid">
 			<h2>Ваши Видео</h2>
-			@forelse($albums as $album)
-				{{$album}}
-			@empty
-				<p>Нет видео</p>
 
-			@endforelse
 		</div>
 	</section>
 

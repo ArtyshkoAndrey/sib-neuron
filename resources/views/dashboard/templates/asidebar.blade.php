@@ -75,7 +75,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('albums.index')}}" class="nav-link {{ active('albums.index') }}">
+                <a href="{{route('video.index')}}" class="nav-link {{ active('video.index') }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>
                     Все видео
@@ -83,7 +83,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('albums.create')}}" class="nav-link {{ active('albums.create') }}">
+                <a href="{{route('video.create')}}" class="nav-link {{ active('video.create') }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>
                     Создать видео

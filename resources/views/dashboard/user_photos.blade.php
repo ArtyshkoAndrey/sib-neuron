@@ -242,3 +242,14 @@
   </div>
 
 @stop
+
+@section('script')
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/material-photo-gallery.min.js"></script>
+  <script>
+      var elem = document.querySelector('.m-p-g');
+
+      document.addEventListener('DOMContentLoaded', function() {
+          var gallery = new MaterialPhotoGallery(elem);
+      });
+  </script>
+@stop
