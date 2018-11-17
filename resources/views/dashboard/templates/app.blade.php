@@ -18,7 +18,9 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="icon" type="image/png" href="{{asset('images/logo.png')}}" />
   <style>
+
       @yield('style')
+
   </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -34,10 +36,10 @@
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Dashboard</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
+          {{--<div class="col-sm-6">--}}
+            {{--<h1 class="m-0 text-dark">Dashboard</h1>--}}
+          {{--</div><!-- /.col -->--}}
+          <div class="offset-sm-6 col-sm-6">
             @include('dashboard.templates.breadcrumb')
           </div><!-- /.col -->
         </div><!-- /.row -->

@@ -10,6 +10,26 @@
 		font-weight: normal;
 		font-style: normal;
 	}
+
+	/* width */
+	::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	/* Track */
+	::-webkit-scrollbar-track {
+		background: #f1f1f1;
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background: #888;
+	}
+
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background: #555;
+	}
     {{--#header{--}}
         {{--background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)), url(/images/header.jpeg);--}}
         {{--background-repeat: no-repeat;--}}
@@ -30,22 +50,6 @@
 		z-index: 1;
 	}
 
-	.navbar form .btn {
-		color: #44a5ff;
-		border-color: #44a5ff;
-	}
-
-	.navbar form .btn:hover {
-		background-color: #44a5ff;
-		color: white;
-	}
-
-	.navbar form .btn:active {
-		background-color: #44a5ff !important;
-		color: white;
-		border-color: #44a5ff !important;
-		outline-color: #44a5ff !important;
-	}
 	.preview,
 	.preview .background,
 	.preview .filter {
@@ -97,23 +101,36 @@
 	.steps .wrapper {
 		height: 100%;
 		padding: 2rem 1rem;
-		border: 1px solid #90948a;
+		border: 1px solid #d8d8d8;
 		border-radius: 20px;
-		-webkit-box-shadow: 6px 17px 37px 1px rgba(0,0,0,0.12);
-			 -moz-box-shadow: 6px 17px 37px 1px rgba(0,0,0,0.12);
-						box-shadow: 6px 17px 37px 1px rgba(0,0,0,0.12);
+		-webkit-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.1);
+			 -moz-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.1);
+						box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.1);
+		-webkit-transition: background .3s,border .3s,-webkit-border-radius .3s,-webkit-box-shadow .3s;
+		transition: background .3s,border .3s,-webkit-border-radius .3s,-webkit-box-shadow .3s;
+		-o-transition: background .3s,border .3s,border-radius .3s,box-shadow .3s;
+		transition: background .3s,border .3s,border-radius .3s,box-shadow .3s;
+		transition: background .3s,border .3s,border-radius .3s,box-shadow .3s,-webkit-border-radius .3s,-webkit-box-shadow .3s;
+	}
+
+	.steps .wrapper:hover {
+		box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.36);
 	}
 
 	.steps .wrapper .icon {
 		font-size: 50pt;
 		text-align: center;
+		color: #2a6faf;
 	}
 
 	.steps .wrapper .text {
-		display: flex;
-		align-items: center;
-		justyfy-content: center;
 		text-align: center;
+	}
+
+	@media (max-width: 768px) {
+		.navbar {
+			background: #343a40 !important;
+		}
 	}
 @stop
 
@@ -126,7 +143,7 @@
 		<div class="content">
 			<h1>Make your photos alive</h1>
 			<h3>Create videos from your photos in VK</h3>
-			<button class="btn">Make your video</button>
+			<a href="{{route('login')}}" class="btn">Make your video</a>
 		</div>
 		<span class="icon"><i class="fas fa-arrow-down"></i></span>
 	</section>

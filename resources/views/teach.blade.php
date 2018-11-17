@@ -48,13 +48,13 @@
                         <div class="form-group text-center">
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-secondary m-1 ">
-                                    <input type="radio" class="label" name="options" id="option1" value="people" autocomplete="off"> Человек
+                                    <input type="radio" class="label" name="options" id="option1" value="people" autocomplete="off" required> Человек
                                 </label>
                                 <label class="btn btn-secondary m-1">
-                                    <input type="radio" class="label" name="options" id="option2" value="dog" autocomplete="off"> Собака
+                                    <input type="radio" class="label" name="options" id="option2" value="dog" autocomplete="off" required> Собака
                                 </label>
                                 <label class="btn btn-secondary m-1">
-                                    <input type="radio" class="label" name="options" id="option3" value="error" autocomplete="off"> Нет
+                                    <input type="radio" class="label" name="options" id="option3" value="error" autocomplete="off" required> Нет
                                 </label>
                             </div>
                         </div>

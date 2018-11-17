@@ -32,6 +32,7 @@
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
   margin: .5rem;
+  border-radius: .25rem;
 }
 .thumbs img {
   backface-visibility: hidden;
@@ -100,7 +101,7 @@
   <div class="container-fluid">
     <h5 class="mb-2">Персональная информация</h5>
     <div class="row">
-      <div class="col-md-3 col-sm-6 col-12">
+      <div class="col-md-4 col-12">
         <div class="info-box">
           <span class="info-box-icon bg-info"><i class="fas fa-images"></i></span>
 
@@ -112,7 +113,7 @@
         </div>
         <!-- /.info-box -->
       </div>
-      <div class="col-md-3 col-sm-6 col-12">
+      <div class="col-md-4 col-12">
         <div class="info-box">
           <span class="info-box-icon bg-info"><i class="fas fa-camera-retro"></i></span>
 
@@ -124,7 +125,7 @@
         </div>
         <!-- /.info-box -->
       </div>
-      <div class="col-md-3 col-sm-6 col-12">
+      <div class="col-md-4 col-12">
         <div class="info-box">
           <span class="info-box-icon bg-info"><i class="fas fa-video"></i></span>
 
@@ -150,15 +151,15 @@
       {{--</div>--}}
     </div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-md-6 col-12">
         <div class="card card-widget">
           <div class="card-header">
             <h3 class="card-title">Последние альбомы</h3>
           </div>
           <div class="card-body p-0">
-            <div class="row ml-0 mr-0 text-center">
+            <div class="row mx-0 text-center">
             @for($i=0; $i < 4; $i++)
-              <div class="col-md-3 col-sm-6 col-6 p-2 thumbs">
+              <div class="col-6 p-2 thumbs">
                 <img src="{{asset('images/person/artyshko.jpg')}}" class="shadow rounded img-fluid pad" alt="">
                 <div class="caption">
                   <span class="title">Заголовок картинки</span>
@@ -177,18 +178,16 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-12">
+      <div class="col-md-6 col-12">
         <div class="card card-widget">
           <div class="card-header">
             <h3 class="card-title">Последние видео</h3>
           </div>
           <div class="card-body p-0">
-            <div class="row my-0 text-center">
+            <div class="row mx-0 text-center">
               @for($i=0; $i < 4; $i++)
-                <div class="col-md-3 col-sm-6 col-6 p-2 thumbs">
+                <div class="col-6 p-2 thumbs">
                   <img src="{{asset('images/person/artyshko.jpg')}}" class="shadow rounded img-fluid pad" alt="">
                   <div class="caption">
                     <span class="title">Заголовок видео</span>
