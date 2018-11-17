@@ -7,7 +7,11 @@
 <section class="content">
   <div class="container-fluid">
     <h2>Создать Альбом</h2>
-
+    <div class="modal1 modal fade" data-backdrop="static" data-focus="true" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered justify-content-center" role="document">
+          <span class="fa fa-spinner fa-spin fa-3x text-white"></span>
+      </div>
+    </div>
     <div class="row">
     	<div class="col-12">
 	        <div class="card">
@@ -26,7 +30,6 @@
 	                at the present moment; and yet I feel that I never was a greater artist than now.
         					<form method="POST" id="contactform">
                     @csrf
-                    <input type="text" name="123123" id="123123123" value="1123123123">
         						<button type="submit" name="submit" class="btn btn-block btn-primary col-sm-3 col-12 mt-2">Создать</button>
         					</form>
 	              </div>
@@ -47,18 +50,20 @@
       $(document).ready(function(){
           $("#contactform").on('submit', function(e){
               e.preventDefault();
+              $('.modal1').modal('show');
               console.log('Фотки начались обрабатываться');
               $.ajax({
                   /* the route pointing to the post function */
-                  url: 'http://sib-neuron.loc/user/photo/albums/store',
+                  url: '{{route("albums.store")}}',
                   type: 'POST',
                   /* send the csrf-token and the input to the controller */
                   // data: {_token: CSRF_TOKEN, label:$(".label:checked").val(), image:$('#image')},
                   data: $('#contactform').serialize(),
                   dataType: 'JSON',
                   /* remind that 'data' is the response of the AjaxController */
-                  success: function (data) { 
-                      console.log('Фотки обработылись');
+                  success: function (data) {
+                    $('.modal1').modal('hide');
+                    console.log('Фотки обработылись' + data.people);
                   }
               }); 
           });
