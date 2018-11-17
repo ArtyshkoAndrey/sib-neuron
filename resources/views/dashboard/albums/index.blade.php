@@ -6,7 +6,7 @@
 
 <section class="content">
   <div class="container-fluid">
-    <h2>Главная Альбомов</h2>
+    <h2>Ваши Альбомы</h2>
     @forelse($albums as $album)
       {{$album}}
     @empty

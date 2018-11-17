@@ -66,14 +66,40 @@
             </li>
           </ul>
           </li>
-          <li class="nav-item">
-            <a href="{{route('user_photos_new_video')}}" class="nav-link {{ active('user_photos_new_video') }}">
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
               <i class="nav-icon far fa-file-video"></i>
-              <p>
-                Создать видео
+              <p>Видео
+                <i class="fa fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('albums.index')}}" class="nav-link {{ active('albums.index') }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Все видео
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('user_photos_new_video')}}" class="nav-link {{ active('user_photos_new_video') }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Создать видео
+                  </p>
+                </a>
+              </li>
+            </ul>
           </li>
+          {{--<li class="nav-item">--}}
+            {{--<a href="{{route('user_photos_new_video')}}" class="nav-link {{ active('user_photos_new_video') }}">--}}
+              {{--<i class="nav-icon far fa-file-video"></i>--}}
+              {{--<p>--}}
+                {{--Создать видео--}}
+              {{--</p>--}}
+            {{--</a>--}}
+          {{--</li>--}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -6,7 +6,7 @@
 
 <section class="content">
   <div class="container-fluid">
-    <h2>Создать Альбомов</h2>
+    <h2>Создать Альбом</h2>
 
     <div class="row">
     	<div class="col-12">

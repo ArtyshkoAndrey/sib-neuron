@@ -136,24 +136,24 @@
         </div>
         <!-- /.info-box -->
       </div>
-      <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-info"><i class="fas fa-money-bill-wave"></i></span>
+      {{--<div class="col-md-3 col-sm-6 col-12">--}}
+        {{--<div class="info-box">--}}
+          {{--<span class="info-box-icon bg-info"><i class="fas fa-money-bill-wave"></i></span>--}}
 
-          <div class="info-box-content">
-            <span class="info-box-text">Баллы</span>
-            <span class="info-box-number">{{rand(1, 99999)}}</span>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-      </div>
+          {{--<div class="info-box-content">--}}
+            {{--<span class="info-box-text">Баллы</span>--}}
+            {{--<span class="info-box-number">{{rand(1, 99999)}}</span>--}}
+          {{--</div>--}}
+          {{--<!-- /.info-box-content -->--}}
+        {{--</div>--}}
+        {{--<!-- /.info-box -->--}}
+      {{--</div>--}}
     </div>
     <div class="row">
       <div class="col-12">
         <div class="card card-widget">
           <div class="card-header">
-          <h3 class="card-title">Последние альбомы</h3>
+            <h3 class="card-title">Последние альбомы</h3>
           </div>
           <div class="card-body p-0">
             <div class="row ml-0 mr-0 text-center">
@@ -173,6 +173,36 @@
                 </div>
               </div>
             @endfor
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-widget">
+          <div class="card-header">
+            <h3 class="card-title">Последние видео</h3>
+          </div>
+          <div class="card-body p-0">
+            <div class="row my-0 text-center">
+              @for($i=0; $i < 4; $i++)
+                <div class="col-md-3 col-sm-6 col-6 p-2 thumbs">
+                  <img src="{{asset('images/person/artyshko.jpg')}}" class="shadow rounded img-fluid pad" alt="">
+                  <div class="caption">
+                    <span class="title">Заголовок видео</span>
+                    <div class="mt-2 row">
+                      <div class="col-6">
+                        <a href="#" class="btn btn-outline-success col-12"><i class="fas fa-eye"></i></a>
+                      </div>
+                      <div class="col-6">
+                        <a href="#" class="btn btn-outline-danger col-12"><i class="fas fa-trash-alt"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              @endfor
             </div>
           </div>
         </div>
