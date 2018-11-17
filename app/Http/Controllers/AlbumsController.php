@@ -87,7 +87,15 @@ class AlbumsController extends Controller
      */
     public function show($id)
     {
-        //
+        $albums = Albums::where('category_id', $id)->where('user_id', Auth::id())->get();
+        $i = 0;
+        $albumsName = Category::where('id', $id)->first();
+        foreach ($albums as $key) {
+            $photos[$i] = Photo::where('id', $key->photo_id)->first();
+            $i++;
+        }
+        $breadcrumbs = Request::Get('breadcrumbs');
+        return view('dashboard.albums.show', compact('photos', 'breadcrumbs','albumsName'));
     }
 
     /**
@@ -121,6 +129,7 @@ class AlbumsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Albums::where('user_id', Auth::id())->where('category_id', $id)->delete();
+        return back()->with('status', 'Альбом удалён!');
     }
 }

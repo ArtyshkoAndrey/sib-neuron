@@ -97,6 +97,14 @@
 
 @section('content')
 
+@if (session('status'))
+<div class="alert alert-success alert-dismissible absolute">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h5><i class="icon fa fa-check"></i> Удачно!</h5>
+   {{ session('status') }}
+</div>
+@endif
+
 <section class="content">
   <div class="container-fluid">
     <h5 class="mb-2">Персональная информация</h5>
@@ -119,7 +127,7 @@
 
           <div class="info-box-content">
             <span class="info-box-text">Обр. фотографий</span>
-            <span class="info-box-number">{{rand(1, 100)}}</span>
+            <span class="info-box-number">{{$countProcessedPhotos}}</span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -131,24 +139,12 @@
 
           <div class="info-box-content">
             <span class="info-box-text">Видеозаписи</span>
-            <span class="info-box-number">{{rand(1, 10)}}</span>
+            <span class="info-box-number">{{rand(1, 10)}}</span> <!-- Изменить -->
           </div>
           <!-- /.info-box-content -->
         </div>
         <!-- /.info-box -->
       </div>
-      {{--<div class="col-md-3 col-sm-6 col-12">--}}
-        {{--<div class="info-box">--}}
-          {{--<span class="info-box-icon bg-info"><i class="fas fa-money-bill-wave"></i></span>--}}
-
-          {{--<div class="info-box-content">--}}
-            {{--<span class="info-box-text">Баллы</span>--}}
-            {{--<span class="info-box-number">{{rand(1, 99999)}}</span>--}}
-          {{--</div>--}}
-          {{--<!-- /.info-box-content -->--}}
-        {{--</div>--}}
-        {{--<!-- /.info-box -->--}}
-      {{--</div>--}}
     </div>
     <div class="row">
       <div class="col-md-6 col-12">
@@ -158,22 +154,37 @@
           </div>
           <div class="card-body p-0">
             <div class="row mx-0 text-center">
-            @for($i=0; $i < 4; $i++)
+            @forelse($albums as $album)
               <div class="col-6 p-2 thumbs">
-                <img src="{{asset('images/person/artyshko.jpg')}}" class="shadow rounded img-fluid pad" alt="">
+                <img src="{{$album['album_first_photo']->url}}" class="shadow rounded img-fluid pad" alt="">
                 <div class="caption">
-                  <span class="title">Заголовок картинки</span>
+                  <span class="title">{{$album['category_name']}}</span>
                   <div class="mt-2 row">
                     <div class="col-6">
-                      <a href="#" class="btn btn-outline-success col-12"><i class="fas fa-eye"></i></a>
+                      <a href="{{ route('albums.show', $album['category_id']) }}" class="btn btn-outline-success col-12"><i class="fas fa-eye"></i></a>
                     </div>
                     <div class="col-6">
-                      <a href="#" class="btn btn-outline-danger col-12"><i class="fas fa-trash-alt"></i></a>
+                      <!-- <a href="{{ route('albums.destroy', $album['category_id']) }}" class="btn btn-outline-danger col-12"><i class="fas fa-trash-alt"></i></a> -->
+                      <form id="delete-form-{{$album['category_id']}}" method="post" action="{{ route('albums.destroy', $album['category_id']) }}" style="display: none">
+                        @csrf
+                        {{ method_field('DELETE') }}
+                      </form>
+                      <a href="" onclick="
+                      if(confirm('Уверены что хотите удалить?'))
+                      {
+                        event.preventDefault();
+                document.getElementById('delete-form-{{$album['category_id']}}').submit();
+                          }
+                      else{
+                        event.preventDefault();
+                      }" class="btn btn-outline-danger col-12" ><i class="fas fa-trash-alt"></i></a>
                     </div>
                   </div>
                 </div>
               </div>
-            @endfor
+            @empty
+              <h4 class="p-3">Альбомов нет</h4>
+            @endforelse
             </div>
           </div>
         </div>
