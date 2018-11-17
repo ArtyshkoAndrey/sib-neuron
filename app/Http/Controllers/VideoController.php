@@ -49,34 +49,7 @@ class VideoController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$respons = array(
-			'answer' => "гуд"
-		);
-		// $photos = Auth::user()->photos;
-		// foreach ($photos as $photo) {
-		//     if (file_exists(public_path() . '/neuron/model.data')) {
 
-		//         $im = new Image2Ml($photo['th_url']);
-		//         $Data = $im->grayScalePixels();
-		//         $modelManager = new ModelManager();
-		//         $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/model.data');
-		//         $label = $classifier->predictProbability($Data);
-		//         if($label['dog'] > 0.7) {
-		//             $newAlbum = new Albums();
-		//             $newAlbum->photo_id = $photo->id;
-		//             $newAlbum->user_id = Auth::id();
-		//             $newAlbum->category_id = 1;
-		//             $newAlbum->save();
-		//         } else if($label['people'] > 0.7) {
-		//             $newAlbum = new Albums();
-		//             $newAlbum->photo_id = $photo->id;
-		//             $newAlbum->user_id = Auth::id();
-		//             $newAlbum->category_id = 2;
-		//             $newAlbum->save();
-		//         }
-		//     }
-		// }
-		return respons()->json($respons);
 	}
 
 	/**
@@ -87,7 +60,8 @@ class VideoController extends Controller
 	 */
 	public function show($id)
 	{
-		//
+		$breadcrumbs = Request::Get('breadcrumbs');
+		return view('dashboard.videos.show', compact('breadcrumbs'));
 	}
 
 	/**
