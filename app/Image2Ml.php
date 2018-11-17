@@ -106,12 +106,14 @@ class Image2Ml {
 
         $x = 0; $y = 0;
 
-        if ($old_x > $old_y) {
+        if ($old_x >= $old_y) {
                 $x = ceil(($old_x - $old_y) / 2);
-                $old_x = $new_size = $old_y;
+                $old_x = $old_y;
+								$new_size = $old_x;
         } elseif ($old_y > $old_x) {
                 $y = ceil(($old_y - $old_x) / 2);
-                $old_y = $new_size = $old_x;
+                $old_y= $old_x;
+								$new_size = $old_y;
         }
         $new_image = imagecreatetruecolor($new_size,$new_size);
         if ($this->type == 3 && $compression != "gd1") {

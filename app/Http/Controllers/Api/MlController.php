@@ -78,6 +78,9 @@ class MlController extends Controller
             }
         }
     }
+    public function create_dog() {
+			exec('ffmpeg -loop 1 -i https://pp.userapi.com/c830609/v830609998/1b22c4/ooAYKYOk3ls.jpg -c:v libx264 -t 30 -pix_fmt yuv420p /var/www/html/public/out.mp4');
+		}
 }
 
 

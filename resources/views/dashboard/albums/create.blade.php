@@ -62,13 +62,17 @@
                   dataType: 'JSON',
                   /* remind that 'data' is the response of the AjaxController */
                   success: function (data) {
-                    $('.modal1').modal('hide');
-                    console.log(data.label);
+                    console.log(data.label +" 123123123");
+                    setTimeout(function() {
+                        $('.modal1').modal('hide');
+                    }, 1000);
+                    console.log($('.modal1'));
                   },
                   error: function (error) {
                       alert('error');
                   }
-              }); 
+
+              });
           });
      });    
   </script>

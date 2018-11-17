@@ -103,56 +103,39 @@
 			</div>
 			<div class="card-body p-0">
 				<div class="row ml-0 mr-0 text-center">
-					@for($i=0; $i < 3; $i++)
+					@forelse($albums as $album)
 						<div class="col-md-3 col-sm-6 col-6 p-2 thumbs">
-							<img src="{{asset('images/person/artyshko.jpg')}}" class="shadow rounded img-fluid pad" alt="" style="object-fit: cover; width: 256px; height: 256px;">
+							<img src="{{$album['album_first_photo']->url}}" class="shadow rounded img-fluid pad" alt="" style="object-fit: cover; width: 256px; height: 256px;">
 							<div class="caption">
-								<span class="title">Заголовок картинки</span>
+								<span class="title">{{$album['category_name']}}</span>
 								<div class="mt-2 row">
 									<div class="col-6">
-										<a href="#" class="btn btn-outline-success col-12"><i class="fas fa-eye"></i></a>
+										<a href="{{ route('albums.show', $album['category_id']) }}" class="btn btn-outline-success col-12"><i class="fas fa-eye"></i></a>
 									</div>
 									<div class="col-6">
-										<a href="#" class="btn btn-outline-danger col-12"><i class="fas fa-trash-alt"></i></a>
+										<form id="delete-form-{{$album['category_id']}}" method="post" action="{{ route('albums.destroy', $album['category_id']) }}" style="display: none">
+											@csrf
+											{{ method_field('DELETE') }}
+										</form>
+										<a href="" onclick="
+														if(confirm('Уверены что хотите удалить?'))
+														{
+														event.preventDefault();
+														document.getElementById('delete-form-{{$album['category_id']}}').submit();
+														}
+														else{
+														event.preventDefault();
+														}" class="btn btn-outline-danger col-12" ><i class="fas fa-trash-alt"></i></a>
 									</div>
 								</div>
 							</div>
 						</div>
-					@endfor
-
-						<div class="col-md-3 col-sm-6 col-6 p-2 thumbs">
-							<img src="{{asset('images/header.jpeg')}}" class="shadow rounded img-fluid pad" alt="" style="object-fit: cover; width: 256px; height: 256px;">
-							<div class="caption">
-								<span class="title">Заголовок картинки</span>
-								<div class="mt-2 row">
-									<div class="col-6">
-										<a href="#" class="btn btn-outline-success col-12"><i class="fas fa-eye"></i></a>
-									</div>
-									<div class="col-6">
-										<a href="#" class="btn btn-outline-danger col-12"><i class="fas fa-trash-alt"></i></a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-sm-6 col-6 p-2 thumbs">
-							<img src="{{asset('images/header.jpeg')}}" class="shadow rounded img-fluid pad" alt="" style="object-fit: cover; width: 256px; height: 256px;">
-							<div class="caption">
-								<span class="title">Заголовок картинки</span>
-								<div class="mt-2 row">
-									<div class="col-6">
-										<a href="#" class="btn btn-outline-success col-12"><i class="fas fa-eye"></i></a>
-									</div>
-									<div class="col-6">
-										<a href="#" class="btn btn-outline-danger col-12"><i class="fas fa-trash-alt"></i></a>
-									</div>
-								</div>
-							</div>
-						</div>
+						@empty
+						<h4>Альбомов нет</h4>
+					@endforelse
 				</div>
 			</div>
 		</div>
-      <p>Нет альбомов</p>
   </div>
 </section>
 

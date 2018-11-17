@@ -49,7 +49,31 @@ class VideoController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		function exec_script($url, $params=array())
+		{
+			$parts = parse_url($url);
 
+			if (!$fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80)) {
+				return false;
+			}
+			$contents = "";
+			$data = "id=" . Auth::id();
+
+			fwrite($fp, "POST " . url('api/create-video-dog') . " HTTP/1.1\r\n");
+			fwrite($fp, "Host: " . $parts['host'] . "\r\n");
+			fwrite($fp, "Content-Type: application/x-www-form-urlencoded\r\n");
+			fwrite($fp, "Content-Length: " . strlen($data) . "\r\n");
+			fwrite($fp, "Connection: Close\r\n\r\n");
+			fwrite($fp, $data);
+			fclose($fp);
+
+			return true;
+		}
+		$bool = exec_script(url("api/create-video-dog"), array('id' => Auth::id()));
+		if($bool)
+			return response()->json(array('label' => 'Ваше видео создаётся'));
+		else
+			return response()->json(array('label' => 'Ошибка'));
 	}
 
 	/**

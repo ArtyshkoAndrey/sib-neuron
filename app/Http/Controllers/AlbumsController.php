@@ -27,9 +27,22 @@ class AlbumsController extends Controller
      */
     public function index()
     {
-        $breadcrumbs = Request::Get('breadcrumbs');
-        $albums = [];
-        return view('dashboard.albums.index', compact('breadcrumbs', 'albums'));
+				$breadcrumbs = Request::Get('breadcrumbs');
+			$categories = Category::all();
+			$i = 0;
+			$albums = array();
+			foreach ($categories as $category) {
+				$count = Albums::where('user_id', Auth::id())->where('category_id', $category->id)->count();
+				if($count < 1) {
+					continue;
+				}
+				$albums[$i] = Albums::where('user_id', Auth::id())->where('category_id', $category->id)->first();
+				$albums[$i]['category_name'] = $category->name;
+				$albums[$i]['album_first_photo'] = Photo::where('id', $albums[$i]->photo_id)->first();
+				$albums[$i]['category_id'] = $category->id;
+				$i++;
+			}
+			return view('dashboard.albums.index', compact('breadcrumbs', 'albums'));
     }
 
     /**
@@ -52,27 +65,25 @@ class AlbumsController extends Controller
     public function store(Request $request)
     {
         function exec_script($url, $params=array())
-        {
-            $data = http_build_query($params);
-            $parts = parse_url($url);
-            
-            if (!$fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80))
-            {
-                return false;
-            }
-         
-            $data = "id=".Auth::id();
-             
-            fwrite($fp, "POST http://sib-neuron.loc/api/create-albums HTTP/1.1\r\n");
-            fwrite($fp, "Host: " . $parts['host'] . "\r\n");
-            fwrite($fp, "Content-Type: application/x-www-form-urlencoded\r\n");
-            fwrite($fp, "Content-Length: " . strlen($data) . "\r\n");
-            fwrite($fp, "Connection: Close\r\n\r\n");
-            fwrite($fp, $data);
-            fclose($fp);
-            
-            return true;
-        }
+				{
+					$parts = parse_url($url);
+
+					if (!$fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80)) {
+						return false;
+					}
+
+					$data = "id=" . Auth::id();
+
+					fwrite($fp, "POST " . url('/api/create-albums') . " HTTP/1.1\r\n");
+					fwrite($fp, "Host: " . $parts['host'] . "\r\n");
+					fwrite($fp, "Content-Type: application/x-www-form-urlencoded\r\n");
+					fwrite($fp, "Content-Length: " . strlen($data) . "\r\n");
+					fwrite($fp, "Connection: Close\r\n\r\n");
+					fwrite($fp, $data);
+					fclose($fp);
+
+					return true;
+				}
         $bool = exec_script(url("api/create-albums"), array('id' => Auth::id()));
         if($bool)
             return response()->json(array('label' => 'Ваши фотографии обрабатываются'));
