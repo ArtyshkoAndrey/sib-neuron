@@ -63,7 +63,7 @@
                   /* remind that 'data' is the response of the AjaxController */
                   success: function (data) {
                     $('.modal1').modal('hide');
-                    console.log('Фотки обработылись' + data.label);
+                    console.log(data.label);
                   },
                   error: function (error) {
                       alert('error');

@@ -69,6 +69,12 @@ class MlController extends Controller
                 $newAlbum->user_id = $id;
                 $newAlbum->category_id = 2;
                 $newAlbum->save();
+            } else if($label[0]['dog'] > 0.7) {
+                $newAlbum = new Albums();
+                $newAlbum->photo_id = $photo->id;
+                $newAlbum->user_id = $id;
+                $newAlbum->category_id = 1;
+                $newAlbum->save();
             }
         }
     }

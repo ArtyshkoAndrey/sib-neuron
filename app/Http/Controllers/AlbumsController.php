@@ -39,6 +39,17 @@ class AlbumsController extends Controller
     public function create()
     {
         $breadcrumbs = Request::Get('breadcrumbs');
+        return view('dashboard.albums.create', compact('breadcrumbs'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         function exec_script($url, $params=array())
         {
             $data = http_build_query($params);
@@ -61,41 +72,11 @@ class AlbumsController extends Controller
             
             return true;
         }
-        exec_script(url("api/create-albums"), array('id' => Auth::id()));
-        return view('dashboard.albums.create', compact('breadcrumbs'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        function exec_script($url, $params = array())
-        {
-            $parts = parse_url($url);
-         
-            if (!$fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80))
-            {
-                return false;
-            }
-         
-            $data = http_build_query($params, '', '&');
-         
-            fwrite($fp, "POST " . (!empty($parts['path']) ? $parts['path'] : '/') . " HTTP/1.1\r\n");
-            fwrite($fp, "Host: " . $parts['host'] . "\r\n");
-            fwrite($fp, "Content-Type: application/x-www-form-urlencoded\r\n");
-            fwrite($fp, "Content-Length: " . strlen($data) . "\r\n");
-            fwrite($fp, "Connection: Close\r\n\r\n");
-            fwrite($fp, $data);
-            fclose($fp);
-         
-            return true;
-        }
-        exec_script('url("api/create-albums")');
-        return response()->json(array('label'=>'123'));
+        $bool = exec_script(url("api/create-albums"), array('id' => Auth::id()));
+        if($bool)
+            return response()->json(array('label' => 'Ваши фотографии обрабатываются'));
+        else
+            return response()->json(array('label' => 'Ошибка'));
     }
 
     /**
