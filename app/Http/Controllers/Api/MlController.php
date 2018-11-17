@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use App\Image2Ml;
 use App\ImageParser;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use App\Photo;
+use App\Albums;
 
 class MlController extends Controller
 {
@@ -48,6 +51,26 @@ class MlController extends Controller
         $im = $im->setIm();
         $response['im'] = $im;
         return response()->json($response);
+    }
+
+    public function createAlbums(Request $request) {
+        $id = (integer)$request->id;
+        $photos = Photo::where('user_id', $id)->get();
+        $i=0;
+        $modelManager = new ModelManager();
+        $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/model.data');
+        foreach ($photos as $photo) {
+            $im = new Image2Ml($photo['th_url']);
+            $Data = $im->grayScalePixels();
+            $label = $classifier->predictProbability($Data);
+            if($label[0]['people'] > 0.7) {
+                $newAlbum = new Albums();
+                $newAlbum->photo_id = $photo->id;
+                $newAlbum->user_id = $id;
+                $newAlbum->category_id = 2;
+                $newAlbum->save();
+            }
+        }
     }
 }
 

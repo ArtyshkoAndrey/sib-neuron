@@ -39,6 +39,29 @@ class AlbumsController extends Controller
     public function create()
     {
         $breadcrumbs = Request::Get('breadcrumbs');
+        function exec_script($url, $params=array())
+        {
+            $data = http_build_query($params);
+            $parts = parse_url($url);
+            
+            if (!$fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80))
+            {
+                return false;
+            }
+         
+            $data = "id=".Auth::id();
+             
+            fwrite($fp, "POST http://sib-neuron.loc/api/create-albums HTTP/1.1\r\n");
+            fwrite($fp, "Host: " . $parts['host'] . "\r\n");
+            fwrite($fp, "Content-Type: application/x-www-form-urlencoded\r\n");
+            fwrite($fp, "Content-Length: " . strlen($data) . "\r\n");
+            fwrite($fp, "Connection: Close\r\n\r\n");
+            fwrite($fp, $data);
+            fclose($fp);
+            
+            return true;
+        }
+        exec_script(url("api/create-albums"), array('id' => Auth::id()));
         return view('dashboard.albums.create', compact('breadcrumbs'));
     }
 
@@ -50,36 +73,29 @@ class AlbumsController extends Controller
      */
     public function store(Request $request)
     {
-        $respons = array(
-            'answer' => "Альбомы созданы",
-            'label' => null
-        );
-        $photos = Auth::user()->photos;
-        foreach ($photos as $photo) {
-            $Headers = @get_headers($photo['th_url']);
-            if($headers[0] != 'HTTP/1.1 404 Not Found') {
-                $im = new Image2Ml($photo['th_url']);
-                $Data = $im->grayScalePixels();
-                $modelManager = new ModelManager();
-                $classifier = $modelManager->restoreFromFile(public_path() . '/neuron/model.data');
-                $label = $classifier->predictProbability($Data);
-                if($label[0]['dog'] > 0.7) {
-                    $newAlbum = new Albums();
-                    $newAlbum->photo_id = $photo->id;
-                    $newAlbum->user_id = Auth::id();
-                    $newAlbum->category_id = 1;
-                    $newAlbum->save();
-                } else if($label[0]['people'] > 0.7) {
-                    $newAlbum = new Albums();
-                    $newAlbum->photo_id = $photo->id;
-                    $newAlbum->user_id = Auth::id();
-                    $newAlbum->category_id = 2;
-                    $newAlbum->save();
-                }
+        function exec_script($url, $params = array())
+        {
+            $parts = parse_url($url);
+         
+            if (!$fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80))
+            {
+                return false;
             }
-
+         
+            $data = http_build_query($params, '', '&');
+         
+            fwrite($fp, "POST " . (!empty($parts['path']) ? $parts['path'] : '/') . " HTTP/1.1\r\n");
+            fwrite($fp, "Host: " . $parts['host'] . "\r\n");
+            fwrite($fp, "Content-Type: application/x-www-form-urlencoded\r\n");
+            fwrite($fp, "Content-Length: " . strlen($data) . "\r\n");
+            fwrite($fp, "Connection: Close\r\n\r\n");
+            fwrite($fp, $data);
+            fclose($fp);
+         
+            return true;
         }
-        return respons()->json($respons);
+        exec_script('url("api/create-albums")');
+        return response()->json(array('label'=>'123'));
     }
 
     /**

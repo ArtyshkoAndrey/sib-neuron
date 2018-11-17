@@ -46,3 +46,4 @@ Route::get('login/vk/callback', 'Auth\LoginController@handleProviderCallback');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::post('api/train', 'Api\MlController@train');
+Route::post('api/create-albums', 'Api\MlController@createAlbums');

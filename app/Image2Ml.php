@@ -80,7 +80,6 @@ class Image2Ml {
         }
 
         imagecopyresampled($im, $this->im, 0, 0, 0, 0,$this->size, $this->size, $this->w, $this->h);
-        imagejpeg($im, public_path() . "/test.jpg",100);
         return $im;
     }
 
