@@ -86,7 +86,9 @@
 		font-size: 40pt;
 	}
 
-	.preview .content .btn {
+	.preview .content .btn,
+	.developers .btn,
+	.steps .text .btn {
 		margin-top: 2rem;
 		background: #2a6faf;
 		color: white;
@@ -127,11 +129,43 @@
 		text-align: center;
 	}
 
+	.developers .name {
+		font-family: inherit;
+	}
+
+	footer .small {
+		color: white !important;
+	}
+
+	footer a {
+		color: white;
+		text-decoration: underline;
+	}
+
+	footer a:hover {
+		color: lightgray;
+	}
+
+	footer ul a {
+		text-decoration: none;
+	}
+
+	footer ul a:hover {
+		color: lightgray;
+		text-decoration: none;
+	}
+
 	@media (max-width: 768px) {
 		.navbar {
 			background: #343a40 !important;
 		}
+
+		footer ul {
+			display: flex;
+			justify-content: space-evenly;
+		}
 	}
+
 @stop
 
 @section('title', 'Вк, фото, видео')
@@ -151,7 +185,7 @@
 		<div class="container mt-4">
 			<h1>Easy 3 steps</h1>
 			<div class="row mt-4">
-				<div class="col-sm-4 col-12">
+				<div class="col-sm-4 col-12 mt-2">
 					<div class="wrapper">
 						<div class="title">
 							<h4>Step 1</h4>
@@ -161,10 +195,11 @@
 						</div>
 						<div class="text">
 							<p>Login with VK</p>
+							<a href="{{route('login')}}" class="btn">Make your video</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4 col-12">
+				<div class="col-sm-4 col-12 mt-2">
 					<div class="wrapper">
 						<div class="title">
 							<h4>Step 2</h4>
@@ -177,7 +212,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4 col-12">
+				<div class="col-sm-4 col-12 mt-2">
 					<div class="wrapper">
 						<div class="title">
 							<h4>Step 3</h4>
@@ -193,71 +228,23 @@
 			</div>
 		</div>
 	</section>
-	<section class="developers">
-
+	<section class="developers mt-5">
+		<div class="container">
+			<h1>Developers</h1>
+			<div class="row">
+				<div class="col-sm-6 col-12 d-flex flex-column align-items-center p-5">
+					<img class="rounded-circle block-center" src="{{asset('images/person/artyshko.jpg')}}" width="250" height="250">
+					<h3 class="name pt-2">Артышко Андрей</h3>
+					<p class="text text-center">{{--Тимлид, основатель сервиса, главный разработчик, разработчик серверной части сервиса, а так же нейроной сети--}}Teamlead, the founder of the service, the main developer, the developer of the server part of the service, as well as the neural network</p>
+					<a class="btn mt-auto" target="_blank" href="https://artyshko.ru" role="button">Details »</a>
+				</div>
+				<div class="col-sm-6 col-12 d-flex flex-column align-items-center p-5">
+					<img class="rounded-circle block-center" src="{{asset('images/person/hugant.jpeg')}}" width="250" height="250">
+					<h3 class="name pt-2">Миронов Даниил</h3>
+					<p class="text text-center">Frontend, design and development of landing page and some other modules</p>
+					<a class="btn mt-auto" target="_blank" href="https://hugant.github.io" role="button">Details »</a>
+				</div>
+			</div>
+		</div>
 	</section>
-{{--<div id="header" class="position-relative overflow-hidden p-3 p-md-5 text-center text-white bg-light">--}}
-  {{--<div class="col-md-5 p-lg-5 mx-auto my-5">--}}
-    {{--<h1 class="display-5 font-weight-normal">Siberian neuron</h1>--}}
-    {{--<p class="lead font-weight-normal">Загружайте свои фотографии и выбирайте шаблон слайд-шоу. Из них мы сделаем красивое видео, которое вы сможете скачать.</p>--}}
-    {{--<a class="btn btn-outline-success text-white" href="{{ route('login') }}">Создать проект</a>--}}
-  {{--</div>--}}
-{{--</div>--}}
-{{--<section class="container py-5">--}}
-    {{--<div class="row text-center">--}}
-        {{--<div class="col-12">--}}
-            {{--<h2>Надежное хранилище </h2>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="row py-3">--}}
-        {{--<div class="col-12">--}}
-            {{--<div class="p text-center">--}}
-                {{--Фото и видео можно бесплатно загружать в неограниченном количестве в надежное хранилище. Они доступны вам в любое время с любого телефона, планшета или компьютера.--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</section>--}}
-{{--<section class="container h-100">--}}
-    {{--<div class="d-flex flex-row row">--}}
-        {{--<div class="d-flex flex-column col-md-7 align-self-center">--}}
-            {{--<p>Всегда приятно получить в подарок от близкого человека видеоролик, сделанный из совместных фотографий. Да и преподнести кому-нибудь такой подарок не менее приятно, ведь создание видеоролика из фотографий своими руками – очень интересный и увлекательный процесс.</p>--}}
-            {{--<p>Превратите свой цифровой фотоальбом в яркое и запоминающееся слайд-шоу! Чтобы самостоятельно создать видео из фото, вам нужно скачать программу и выполнить всего пять простых шагов.</p>--}}
-        {{--</div>--}}
-        {{--<div class="d-flex flex-column col-md-5">--}}
-            {{--<img class="featurette-image img-fluid mx-auto" src="{{ asset('images/Siberian Neuron.jpg') }}">--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</section>--}}
-{{--<section class="container-fluid h-100 my-5 py-5" style="background-color: #f7f7f9">--}}
-  {{--<div class="row text-center">--}}
-    {{--<div class="col-12">--}}
-      {{--<h2>Разработчики</h2>    --}}
-    {{--</div>--}}
-  {{--</div>--}}
-  {{--<div class="row">--}}
-    {{--<div class="col-10 offset-1">--}}
-      {{--<div class="d-flex flex-row row text-center">--}}
-        {{--<div class="d-flex flex-column col-md-4 align-items-center my-5">--}}
-          {{--<img class="rounded-circle block-center" src="{{asset('images/person/artyshko.jpg')}}" alt="Generic placeholder image" width="140" height="140">--}}
-          {{--<h3 class="pt-2">Артышко Андрей</h3>--}}
-          {{--<p class="text">Тимлид, основатель сервиса, главный разработчик, разработчик серверной части сервиса, а так же нейроной сети</p>--}}
-          {{--<a class="btn btn-secondary mt-auto" target="_blank" href="https://artyshko.ru" role="button">Подробней »</a>--}}
-        {{--</div>--}}
-        {{--<div class="d-flex flex-column col-md-4 align-items-center my-5">--}}
-          {{--<img class="rounded-circle" src="{{asset('images/person/mironov.jpg')}}" alt="Generic placeholder image" width="140" height="140">--}}
-          {{--<h3 class="pt-2">Миронов Даниил</h3>--}}
-          {{--<p class="text">Фронтенд разраб. хз что дальше ден придумай сам</p>--}}
-          {{--<a class="btn btn-secondary mt-auto" target="_blank" href="https://vk.com/hugant" role="button">Подробней »</a>--}}
-        {{--</div><!-- /.col-lg-4 -->--}}
-        {{--<div class="d-flex flex-column col-md-4 align-items-center my-5">--}}
-          {{--<img class="rounded-circle" src="{{asset('images/person/sacyk.jpg')}}" alt="Generic placeholder image" width="140" height="140">--}}
-          {{--<h3 class="pt-2">Сацук Михаил</h3>--}}
-          {{--<p class="text">копирайтер</p>--}}
-          {{--<a class="btn btn-secondary mt-auto" target="_blank" href="https://vk.com/m1shaowned" role="button">Подробнее »</a>--}}
-        {{--</div><!-- /.col-lg-4 -->--}}
-      {{--</div>        --}}
-    {{--</div>--}}
-  {{--</div>--}}
-{{--</section>--}}
-
 @stop
