@@ -10,7 +10,7 @@
 			@forelse($albums as $album)
 				{{$album}}
 			@empty
-				<p>Нет альбомов</p>
+				<p>Нет видео</p>
 
 			@endforelse
 		</div>

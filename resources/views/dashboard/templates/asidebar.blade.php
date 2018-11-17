@@ -83,7 +83,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('user_photos_new_video')}}" class="nav-link {{ active('user_photos_new_video') }}">
+                <a href="{{route('albums.create')}}" class="nav-link {{ active('albums.create') }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>
                     Создать видео
