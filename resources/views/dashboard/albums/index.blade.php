@@ -91,6 +91,11 @@
 	-webkit-transition-delay: 0.25s;
 	transition-delay: 0.25s;
 	}
+
+	.card-body img {
+		object-fit: cover; width: 256px; height: 256px;
+	}
+}
 @stop
 
 @section('content')
@@ -105,7 +110,7 @@
 				<div class="row ml-0 mr-0 text-center">
 					@forelse($albums as $album)
 						<div class="col-md-3 col-sm-6 col-6 p-2 thumbs">
-							<img src="{{$album['album_first_photo']->url}}" class="shadow rounded img-fluid pad" alt="" style="object-fit: cover; width: 256px; height: 256px;">
+							<img src="{{$album['album_first_photo']->url}}" class="shadow rounded img-fluid pad">
 							<div class="caption">
 								<span class="title">{{$album['category_name']}}</span>
 								<div class="mt-2 row">

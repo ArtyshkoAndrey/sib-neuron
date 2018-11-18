@@ -92,6 +92,10 @@
   -webkit-transition-delay: 0.25s;
           transition-delay: 0.25s;
 }
+
+.card-body img {
+    object-fit: cover; width: 256px; height: 256px;
+  }
 @stop
 
 

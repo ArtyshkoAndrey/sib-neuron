@@ -1,12 +1,23 @@
+\\
 @extends('dashboard.templates.app')
 
 @section('title', "Альбомы " . Auth::user()->screen_name)
+
+@section('style')
+  #alert {
+    display: none;
+  }
+@stop
 
 @section('content')
 
 <section class="content">
   <div class="container-fluid">
     <h2>Создать Альбом</h2>
+    <div id="alert" class="alert alert-info alert-dismissible">
+      
+    </div>
+
     <div class="modal1 modal fade" data-backdrop="static" data-focus="true" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered justify-content-center" role="document">
           <span class="fa fa-spinner fa-spin fa-3x text-white"></span>
@@ -21,13 +32,7 @@
 	          <div class="card-body">
 	            <div class="tab-content">
 	              <div class="tab-pane active" id="tab_1">
-	                A wonderful serenity has taken possession of my entire soul,
-	                like these sweet mornings of spring which I enjoy with my whole heart.
-	                I am alone, and feel the charm of existence in this spot,
-	                which was created for the bliss of souls like mine. I am so happy,
-	                my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
-	                that I neglect my talents. I should be incapable of drawing a single stroke
-	                at the present moment; and yet I feel that I never was a greater artist than now.
+	                Наш сервис создаст для два альбома фотографий, с собаками и людьми. В данный момент есть погрешности в определение, поэтому не обижайтесь если наш сервис назавет вас собакой :) 
         					<form method="POST" id="contactform">
                     @csrf
         						<button type="submit" name="submit" class="btn btn-block btn-primary col-sm-3 col-12 mt-2">Создать</button>
@@ -51,25 +56,36 @@
           $("#contactform").on('submit', function(e){
               e.preventDefault();
               $('.modal1').modal('show');
-              console.log('Фотки начались обрабатываться');
               $.ajax({
                   /* the route pointing to the post function */
                   url: '{{route("albums.store")}}',
-                  type: 'POST',
+                  type: 'POST',  
                   /* send the csrf-token and the input to the controller */
                   // data: {_token: CSRF_TOKEN, label:$(".label:checked").val(), image:$('#image')},
                   data: $('#contactform').serialize(),
                   dataType: 'JSON',
                   /* remind that 'data' is the response of the AjaxController */
                   success: function (data) {
-                    console.log(data.label +" 123123123");
                     setTimeout(function() {
-                        $('.modal1').modal('hide');
+                      $('.modal1').modal('hide');
+                      $("#alert")[0].innerHTML = '<h5><i class="icon fa fa-info"></i> Обработка!</h5>' + data.label;
+                      $('#alert').show();
                     }, 1000);
-                    console.log($('.modal1'));
+
+                    setTimeout(function() {
+                      $("#alert").hide(1000);
+                    }, 6000);                    
                   },
                   error: function (error) {
-                      alert('error');
+                    setTimeout(function() {
+                      $('.modal1').modal('hide');
+                      $("#alert")[0].innerHTML = '<h5><i class="icon fa fa-info"></i> Обработка!</h5> Ошибка обработки фотографий';
+                      $("#alert").show(1000);
+                    }, 1000);
+
+                    setTimeout(function() {
+                      $("#alert").hide(1000);
+                    }, 6000);
                   }
 
               });

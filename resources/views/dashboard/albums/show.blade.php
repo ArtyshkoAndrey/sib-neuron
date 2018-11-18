@@ -224,9 +224,11 @@
 
 @section('content')
 
-{{$albumsName->name}}
-
 <div class="container-fluid">
+  <div class="card-title">
+    <h2> Альбом {{$albumsName->name}}</h2>
+  </div>
+
   <div class="row">
       <div class="m-p-g">
         <div class="m-p-g__thumbs" data-google-image-layout data-max-height="350">
