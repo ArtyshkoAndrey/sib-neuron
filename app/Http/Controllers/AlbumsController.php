@@ -84,8 +84,8 @@ class AlbumsController extends Controller
 
 					return true;
 				}
-        // $bool = exec_script(url("api/create-albums"), array('id' => Auth::id()));
-        $bool = true;
+        $bool = exec_script(url("api/create-albums"), array('id' => Auth::id()));
+        // $bool = true;
         if($bool)
             return response()->json(array('label' => 'Ваши фотографии обрабатываются'));
         else

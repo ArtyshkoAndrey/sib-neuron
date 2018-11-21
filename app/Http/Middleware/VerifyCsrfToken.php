@@ -20,6 +20,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'api/create-albums/',
-				'api/create-video-dog'
+				'api/create-video'
     ];
 }

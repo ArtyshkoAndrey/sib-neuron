@@ -143,7 +143,7 @@
 
           <div class="info-box-content">
             <span class="info-box-text">Видеозаписи</span>
-            <span class="info-box-number">{{rand(1, 10)}}</span> <!-- Изменить -->
+            <span class="info-box-number">{{count(Auth::user()->videos)}}</span> <!-- Изменить -->
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -201,22 +201,37 @@
           </div>
           <div class="card-body p-0">
             <div class="row mx-0 text-center">
-              @for($i=0; $i < 4; $i++)
+              @forelse(Auth::user()->videos as $video)
                 <div class="col-6 p-2 thumbs">
-                  <img src="{{asset('images/person/artyshko.jpg')}}" class="shadow rounded img-fluid pad" alt="">
+                  <img src="{{asset('images/video.png')}}" class="shadow rounded img-fluid pad" alt="">
                   <div class="caption">
-                    <span class="title">Заголовок видео</span>
+                    <!-- <span class="title">Заголовок видео</span> -->
                     <div class="mt-2 row">
                       <div class="col-6">
-                        <a href="#" class="btn btn-outline-success col-12"><i class="fas fa-eye"></i></a>
+                        <a href="{{route('video.show', $video->id)}}" class="btn btn-outline-success col-12"><i class="fas fa-eye"></i></a>
                       </div>
                       <div class="col-6">
-                        <a href="#" class="btn btn-outline-danger col-12"><i class="fas fa-trash-alt"></i></a>
+                        <!-- <a href="#" class="btn btn-outline-danger col-12"><i class="fas fa-trash-alt"></i></a> -->
+                        <form id="delete-form-{{$video['id']}}" method="post" action="{{ route('video.destroy', $video['id']) }}" style="display: none">
+                        @csrf
+                        {{ method_field('DELETE') }}
+                      </form>
+                      <a href="" onclick="
+                      if(confirm('Уверены что хотите удалить?'))
+                      {
+                        event.preventDefault();
+                document.getElementById('delete-form-{{$video['id']}}').submit();
+                          }
+                      else{
+                        event.preventDefault();
+                      }" class="btn btn-outline-danger col-12" ><i class="fas fa-trash-alt"></i></a>
                       </div>
                     </div>
                   </div>
                 </div>
-              @endfor
+              @empty
+                  <h4 class="p-3">Видео нет</h4>
+              @endforelse
             </div>
           </div>
         </div>

@@ -136,7 +136,7 @@
 							</div>
 						</div>
 						@empty
-						<h4>Альбомов нет</h4>
+						<h4 class="p-3">Альбомов нет</h4>
 					@endforelse
 				</div>
 			</div>

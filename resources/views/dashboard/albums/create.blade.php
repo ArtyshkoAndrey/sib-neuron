@@ -1,4 +1,3 @@
-\\
 @extends('dashboard.templates.app')
 
 @section('title', "Альбомы " . Auth::user()->screen_name)
@@ -66,6 +65,7 @@
                   dataType: 'JSON',
                   /* remind that 'data' is the response of the AjaxController */
                   success: function (data) {
+                    // console.log($data);
                     setTimeout(function() {
                       $('.modal1').modal('hide');
                       $("#alert")[0].innerHTML = '<h5><i class="icon fa fa-info"></i> Обработка!</h5>' + data.label;
@@ -77,6 +77,7 @@
                     }, 6000);                    
                   },
                   error: function (error) {
+                    // console.log(error);
                     setTimeout(function() {
                       $('.modal1').modal('hide');
                       $("#alert")[0].innerHTML = '<h5><i class="icon fa fa-info"></i> Обработка!</h5> Ошибка обработки фотографий';

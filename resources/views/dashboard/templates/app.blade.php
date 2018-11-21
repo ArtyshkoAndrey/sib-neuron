@@ -17,6 +17,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="icon" type="image/png" href="{{asset('images/logo.png')}}" />
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <style>
 
       @yield('style')

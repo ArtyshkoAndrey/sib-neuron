@@ -9,6 +9,7 @@ use App\Photo;
 use App\Albums;
 use App\Category;
 use Request;
+use App\Video;
 
 class HomeController extends Controller
 {

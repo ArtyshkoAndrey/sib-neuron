@@ -47,5 +47,11 @@ class User extends Authenticatable
         $albums = Albums::where('category_id', 1)->where('user_id', Auth::id())->get();
         return $albums;
     }
-
+    /*
+    * Получить комментарии статьи блога.
+    */
+    public function videos()
+    {
+        return $this->hasMany('App\Video');
+    }
 }

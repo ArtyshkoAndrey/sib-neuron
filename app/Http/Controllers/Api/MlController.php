@@ -14,6 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Photo;
 use App\Albums;
+use App\Video;
 
 class MlController extends Controller
 {
@@ -63,7 +64,7 @@ class MlController extends Controller
             $im = new Image2Ml($photo['th_url']);
             $Data = $im->grayScalePixels();
             $label = $classifier->predictProbability($Data);
-            if($label[0]['people'] > 0.7) {
+            if($label[0]['people'] > 0.8) {
                 $newAlbum = new Albums();
                 $newAlbum->photo_id = $photo->id;
                 $newAlbum->user_id = $id;
@@ -78,8 +79,35 @@ class MlController extends Controller
             }
         }
     }
-    public function create_dog() {
-			exec('ffmpeg -loop 1 -i https://pp.userapi.com/c830609/v830609998/1b22c4/ooAYKYOk3ls.jpg -c:v libx264 -t 30 -pix_fmt yuv420p /var/www/html/public/out.mp4');
+    public function create_video(Request $request) {
+    	$ffmpeg = "";
+			$cat_id = $request->category_id;
+			$id = $request->id;
+			$myfile = fopen(public_path()."/people/newfile.txt", "w");
+
+			$photos = Albums::where('user_id', $id)->where('category_id', $cat_id)->get();
+			$i=0;
+			$txt="";
+			foreach ($photos as $photo) {
+				$p = Photo::where('id', $photo->photo_id)->first();
+				$k = strval($i);
+				while (strlen($k) < 3) {
+					$k = "0" . $k;
+				}
+				copy($p->url,public_path()."/people/". $k .".jpg");
+				$i++;
+			}
+			fwrite($myfile, $txt);
+			fclose($myfile);
+			$name = rand(0,1111);
+
+			exec('ffmpeg -r 1 -start_number 0 -i "/var/www/html/public/people/%3d.jpg" -c:v libx264 -vf "fps=30,format=yuv420p" "/var/www/html/public/video/'.$name.'.mp4"');
+			exec('rm /var/www/html/public/people/*');
+
+			$video = new Video();
+			$video->user_id = $id;
+			$video->src = $name;
+			$video->save();
 		}
 }
 

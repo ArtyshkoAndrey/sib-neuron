@@ -43,4 +43,4 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::post('api/train', 'Api\MlController@train');
 Route::post('api/create-albums', 'Api\MlController@createAlbums');
-Route::post('api/create-video-dog', 'Api\MlController@create_dog');
+Route::post('api/create-video', 'Api\MlController@create_video');

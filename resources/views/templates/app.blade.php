@@ -34,9 +34,9 @@
           <li class="nav-item">
             <a class="nav-link {{active('index')}}" href="{{ route('index') }}">Главная <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link {{active('teach')}}" href="{{ route('teach') }}">Обучение</a>
-          </li>
+          </li> -->
           @guest
             <li class="nav-item">
               <a class="nav-link {{active('login')}}" href="{{ route('login') }}">Вход</a>
@@ -68,7 +68,7 @@
           {{--<h5>Основные</h5>--}}
           <ul class="list-unstyled text-small">
             <li><a href="{{ url('/') }}">Главная</a></li>
-            <li><a href="{{ route('teach') }}">Обучение</a></li>
+            <!-- <li><a href="{{ route('teach') }}">Обучение</a></li> -->
             @guest
               <li><a href="{{ route('login') }}">Вход</a></li>
             @else
